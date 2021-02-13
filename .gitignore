@@ -2,3 +2,4 @@
 *.S.o
 .DS_Store
 outfile*
+/.deps

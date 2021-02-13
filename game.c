@@ -7,6 +7,8 @@ int snakey = 0;
 
 void game_init() {
     int i, j;
+    dxsnake = 1;
+    dysnake = 1;
 }
 
 void game_update() {
@@ -14,9 +16,9 @@ void game_update() {
     for(i = 0; i < 32; i++)
         for(j = 0; j < 128; j++)
                 pixels[i][j] = 0;
+    
+    snakex = (snakex + dxsnake) % 128;
+    snakey = (snakey + dysnake) % 32;
 
     pixels[snakey][snakex] = 1;
-
-    snakex = (snakex + 1) % 128;
-    snakey = (snakey + 1) % 32;
 }
