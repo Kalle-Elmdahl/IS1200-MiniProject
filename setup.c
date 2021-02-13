@@ -109,7 +109,8 @@ void setup_leds() {
 void setup_user_inputs() {
     // Initialize port D, set bits 11-5 as inputs.
     // same principle as above, bits that are "1" are inputs
-    TRISD |= 0xfe0;
+    TRISDSET = 0xfe0;
+    TRISFSET = 0x2; //Button 1
 }
 
 void setup_clock() {

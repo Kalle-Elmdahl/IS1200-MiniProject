@@ -43,6 +43,12 @@ void check_buttons();
 extern uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 void update( void );
 
+/* menu.c */
+void draw_menu( void );
+
+/* startpage.c */
+void draw_start_page();
+
 /* util.c */
 void update_display( void );
 void clear_pixels();
@@ -58,3 +64,5 @@ void enable_interrupt(void);
 /* data.c */
 extern uint8_t text[DISPLAY_ROWS][DISPLAY_WIDTH];
 extern const uint8_t const font[128][CHAR_WIDTH];
+extern const uint8_t const lever_up[16][8];
+extern const uint8_t const lever_down[16][8];

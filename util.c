@@ -51,17 +51,18 @@ void update_display() {
 }
 
 void draw_text(int x, int y, char *s) {
-	int i, charx;
 	if(y < 0 || y >= DISPLAY_ROWS || !s)
 		return;
-	
-	for(i = x; i < DISPLAY_WIDTH; i++) {
-		if(*s) {
-            charx = (i - x) % CHAR_WIDTH;
-			text[y][i] = font[*s][charx];
-            if(charx == CHAR_WIDTH - 1) s++;
-		} else
-			text[y][i] = 0;
+	int i, charx = 0, zeros_in_a_row = 0;
+
+    while(*s) {
+        while (charx < CHAR_WIDTH) {
+            if(!font[*s][charx]) zeros_in_a_row++;
+            if(x == DISPLAY_WIDTH || zeros_in_a_row == 2) break;
+            text[y][x++] = font[*s][charx++];
+        }
+        s++;
+        zeros_in_a_row = charx = 0;
     }
 }
 
@@ -71,7 +72,17 @@ void draw_rect(int x, int y, int w, int h) {
     int i, j;
     for(i = 0; i <= w; i++)
         for(j = 0; j <= h; j++)
-            pixels[j + y][i + x] = 1;
+            pixels[j + y][i + x] ^= 1;
+}
+
+void draw_image(int x, int y, int w, int h, uint8_t *image) {
+    int i, j;
+    if(x < 0 || y < 0 || w < 0 || h < 0) return;
+    if(x + w > DISPLAY_WIDTH || y + h > DISPLAY_HEIGHT) return;
+    for(j = 0; j < h; j++)
+        for(i = 0; i < w; i++)
+            pixels[j + y][i + x] ^= image[j * w + i];
+;
 }
 
 void clear_pixels() {

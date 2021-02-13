@@ -21,7 +21,7 @@ int main(void) {
 }
 
 void update() {	
-    // Clock is updated every 10 ms
+    // Clock is updated every 1/10 second
     if (IFS(0) & 0x100) {
 
 		timeoutcount++;
@@ -35,11 +35,10 @@ void update() {
             clear_pixels();
             switch(app_state) {
                 case StartPage:
-                    draw_text(0, 0, "hello");
+                    draw_start_page();
                     break;
                 case Menu:
-                    draw_text(10, 0, "menu");
-                    draw_rect(0, 0, 50, 10);
+                    draw_menu();
                     break;
                 case Game:
                     game_update();

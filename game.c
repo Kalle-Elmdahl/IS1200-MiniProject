@@ -11,7 +11,10 @@ void game_init() {
     dysnake = 1;
 }
 
-void game_update() {
+void game_update() {        
+    draw_rect(DISPLAY_WIDTH - 1 - 20, 0, 20, DISPLAY_HEIGHT);
+    draw_image(DISPLAY_WIDTH - 1 - 14, 1, 8, 16, &lever_down[0][0]);
+    draw_text(DISPLAY_WIDTH - 19, 3, "Exit");
     
     snakex = (snakex + dxsnake) % 128;
     snakey = (snakey + dysnake) % 32;
