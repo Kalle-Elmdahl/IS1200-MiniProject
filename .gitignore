@@ -1,0 +1,3 @@
+*.c.o
+*.S.o
+.DS_Store
