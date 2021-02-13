@@ -3,7 +3,7 @@
 #include "mipslab.h"
 
 uint8_t text[DISPLAY_ROWS][DISPLAY_WIDTH];
-const uint8_t const font[DISPLAY_WIDTH][CHAR_WIDTH] = {
+const uint8_t const font[128][CHAR_WIDTH] = {
 	{0, 0, 0, 0, 0, 0, 0}, // Null
 	{0, 0, 0, 0, 0, 0, 0}, // SOH
 	{0, 0, 0, 0, 0, 0, 0}, // STX
@@ -96,7 +96,7 @@ const uint8_t const font[DISPLAY_WIDTH][CHAR_WIDTH] = {
 	{3, 4, 120, 4, 3, 0, 0}, // Y
 	{0, 113, 73, 73, 71, 0, 0}, // Z
 	{0, 127, 65, 65, 0, 0, 0}, // [
-	{2, 4, 8, 16, 32, 64, 0}, // \ 
+	{2, 4, 8, 16, 32, 64, 0}, // backslash
 	{0, 0, 65, 65, 127, 0, 0}, // ]
 	{4, 2, 1, 2, 4, 0, 0}, // ^
 	{64, 64, 64, 64, 64, 64, 0}, // _

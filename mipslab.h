@@ -14,7 +14,7 @@
 #define DISPLAY_ROW_HEIGHT DISPLAY_HEIGHT / DISPLAY_ROWS
 
 /* Text */
-#define CHAR_WIDTH 8
+#define CHAR_WIDTH 7
 
 
 uint8_t dxsnake;
@@ -57,4 +57,4 @@ void enable_interrupt(void);
 
 /* data.c */
 extern uint8_t text[DISPLAY_ROWS][DISPLAY_WIDTH];
-extern const uint8_t const font[DISPLAY_WIDTH][CHAR_WIDTH];
+extern const uint8_t const font[128][CHAR_WIDTH];

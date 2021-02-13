@@ -43,5 +43,5 @@ void check_game_buttons(int btns) {
 
 void check_for_start(int sws, int btns) {
     // The applications should start if all switches are down and any button is pressed
-    if(!sws && btns > 0) app_state = Game;
+    if(!sws && btns > 0) app_state = Menu;
 }
