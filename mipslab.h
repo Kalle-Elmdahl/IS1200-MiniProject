@@ -7,16 +7,30 @@
 
    For copyright and licensing, see file COPYING */
 
+/* Display */
+#define DISPLAY_WIDTH 128
+#define DISPLAY_HEIGHT 32
+#define DISPLAY_ROWS 4
+#define DISPLAY_ROW_HEIGHT DISPLAY_HEIGHT / DISPLAY_ROWS
+
+/* Text */
+#define CHAR_WIDTH 8
+
 
 uint8_t dxsnake;
 uint8_t dysnake;
-
-volatile int* E;
-
+/* Enumerator for different parts of the appliceation */
+enum app_states {StartPage, Menu, Game} app_state;
+enum app_states app_state;
 
 /* setup.c */
 void setup_ports( void );
 void setup_display( void );
+
+volatile int* E;
+void setup_leds( void );
+void setup_user_inputs( void );
+void setup_clock( void );
 
 /* game.c */
 void game_init( void );
@@ -26,13 +40,21 @@ void game_update( void );
 void check_buttons();
 
 /* main.c */
-extern uint8_t pixels[32][128];
+extern uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 void update( void );
 
 /* util.c */
 void update_display( void );
+void clear_pixels();
 uint8_t spi_send_recv(uint8_t data);
 void quicksleep(int cyc);
 
+void draw_text(int x, int y, char *s);
+void draw_rect(int x, int y, int w, int h);
+
 /* interrupt.S */
 void enable_interrupt(void);
+
+/* data.c */
+extern uint8_t text[DISPLAY_ROWS][DISPLAY_WIDTH];
+extern const uint8_t const font[DISPLAY_WIDTH][CHAR_WIDTH];
