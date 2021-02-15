@@ -134,6 +134,8 @@ const uint8_t const font[128][CHAR_WIDTH] = {
 	{120, 68, 66, 68, 120, 0} // Delete
 };
 
+// Image for lever_up
+// Displayed for example in menu (indicating to initate play)
 const uint8_t const lever_up[16][8] = {
     {1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 1},
@@ -153,6 +155,8 @@ const uint8_t const lever_up[16][8] = {
     {1, 1, 1, 1, 1, 1, 1, 1}
 };
 
+// Image for lever_down
+// Shown for example when game begins
 const uint8_t const lever_down[16][8] = {
     {1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 1},
