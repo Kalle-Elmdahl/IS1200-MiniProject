@@ -33,8 +33,36 @@ void setup_user_inputs( void );
 void setup_clock( void );
 
 /* game.c */
+struct Snake player1;
+struct Apple apple;
 void game_init( void );
 void game_update( void );
+
+/* snake.c */
+struct Snake_Body {
+    int x, y;
+};
+
+struct Snake { 
+    // struct Snake_Body *body; // 21 * 6 GOOD SOLUTION ABANDONED TEMP
+    uint8_t x [10];
+    uint8_t y [10];
+    uint8_t direction; // Bits 0->3: Left, Up, Down, Right
+    uint8_t next_direction; // Bits 0->3: Left, Up, Down, Right
+    int length;
+};
+
+struct Snake initialize_snake();
+void display_snake(struct Snake);
+struct Snake update_snake(struct Snake);
+
+/* Apple.c */
+void new_apple();
+void display_apple();
+struct Apple { 
+    uint8_t x;
+    uint8_t y;
+};
 
 /* io.c */
 void check_buttons();
@@ -66,3 +94,4 @@ extern uint8_t text[DISPLAY_ROWS][DISPLAY_WIDTH];
 extern const uint8_t const font[128][CHAR_WIDTH];
 extern const uint8_t const lever_up[16][9];
 extern const uint8_t const lever_down[16][9];
+const uint8_t const apple_icon[6][6];

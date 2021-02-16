@@ -29,20 +29,20 @@ void check_user_inputs() {
 
 void check_game_buttons(int btns) {
     // Button 1
-    if (btns & 0x1)
-        dysnake = -1;
+    if (btns & 0x1 && player1.direction != 0b1000)
+        player1.next_direction = 0b1;
 
     // Button 2
-    if (btns & 0x2)
-        dxsnake = 1;
+    if (btns & 0x2 && player1.direction != 0b100)
+        player1.next_direction = 0b10;
 
     // Button 3
-    if (btns & 0x4)
-        dxsnake = -1;
+    if (btns & 0x4 && player1.direction !=0b10)
+        player1.next_direction = 0b100;
 
     // Button 4
-    if (btns & 0x8)
-        dysnake = 1;
+    if (btns & 0x8 && player1.direction !=0b1)
+        player1.next_direction = 0b1000;
 }
 
 void check_for_start(int sws, int btns) {

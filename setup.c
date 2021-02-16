@@ -117,13 +117,32 @@ void setup_clock() {
     T2CONSET = 0x70; // Set the prescaler to 256.
     PR2 = (80000000 / 256) / 10; // Set timer max
     TMR2 = 0; // Set timer initial value
-
     T2CONSET = 0x8000;  // Start timer 2
 
 
     // Enable interrupts from TMR2
     IPCSET(2) = 0b100; // Interrupt Priority Control bit (IPC2<4:2>)
-    IECSET(0) = 0x100; // Interrupt Enable Control, 
+    IECSET(0) = 0x100; // Interrupt Enable Control, TEMPORARY DISABLE
+
+    // Enable interrupt for Switch 1 (INT1)
+    IECSET(0) = 0x1 << 7;
+    IPCSET(1) = 0x1 << 27;
+
+    /* Maybe remove
+    // Enable interrupt for Switch 2 (INT2)
+    IECSET(0) = 0x1 << 11;
+    IPCSET(1) = 0x1 << 27;
+
+    // Enable interrupt for Switch 3 (INT3)
+    IECSET(0) = 0x1 << 15;
+    IPCSET(1) = 0x1 << 27;
+
+    // Enable interrupt for Switch 4 (INT4)
+    IECSET(0) = 0x1 << 19;
+    IPCSET(1) = 0x1 << 27;
+    */
+
+
     // IEC 8th bit enables Timer 2 according to MIPS ref sheet (p. 90): 
     // For both IEC and IPC:
     // http://ww1.microchip.com/downloads/en/DeviceDoc/61143H.pdf
