@@ -11,8 +11,7 @@ int main(void) {
     setup_display();
     clear_pixels();
     update_display();
-    game_init();
-    app_state = StartPage;
+    app_state = START_PAGE;
 
     setup_leds();
     setup_user_inputs();
@@ -34,13 +33,13 @@ void update() {
             
             clear_pixels();
             switch(app_state) {
-                case StartPage:
+                case START_PAGE:
                     draw_start_page();
                     break;
-                case Menu:
+                case MENU:
                     draw_menu();
                     break;
-                case Game:
+                case GAME:
                     game_update();
                     break;
             }

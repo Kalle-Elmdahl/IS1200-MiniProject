@@ -10,20 +10,21 @@ void check_user_inputs() {
     int btns = (PORTD >> 4) & 0xE | (PORTF >> 1) & 0x1; // Button infromation from port D (btn 2-4) and F (btn 1)
 
     switch(app_state) {
-        case StartPage:
+        case START_PAGE:
             check_for_start(sws, btns);
             return;
-        case Menu:
+        case MENU:
             break;
-        case Game:
+        case GAME:
             check_game_buttons(btns);
             break;
     }
 
     if(sws & 0b1) {
-        app_state = Game;
+        if(app_state == MENU && game_state == GAME_OVER) game_init();
+        app_state = GAME;
     } else {
-        app_state = Menu;
+        app_state = MENU;
     }
 }
 
@@ -47,26 +48,8 @@ void check_game_buttons(int btns) {
 
 void check_for_start(int sws, int btns) {
     // The applications should start if all switches are down and any button is pressed
-    if(!sws && btns > 0) app_state = Menu;
-}
-
-int getbtn(int btn) {
-    int value = 0;
-    switch (btn) {
-        case 1:
-            value = (PORTF)&2;
-            break;
-        case 2:
-            value = ((PORTD>>5)&7) & 1;
-            break;
-        case 3:
-            value = ((PORTD>>5)&7) & 2;
-            break;
-        case 4:
-            value = ((PORTD>>5)&7) & 4;
-            break;
-        default:
-            value = 0;
+    if(!sws && btns > 0) {
+        app_state = MENU;
+        game_init();
     }
-    return value;
 }

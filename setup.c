@@ -120,6 +120,12 @@ void setup_clock() {
     T2CONSET = 0x8000;  // Start timer 2
 
 
+    TMR1 = 0x0; // Clear timer register
+    T1CONSET = 0x0070; // Set prescaler 1:256
+    PR1 = 0x7FFF; // Load period register
+    T1CONSET = 0x8000; // Start timer
+
+
     // Enable interrupts from TMR2
     IPCSET(2) = 0b100; // Interrupt Priority Control bit (IPC2<4:2>)
     IECSET(0) = 0x100; // Interrupt Enable Control, TEMPORARY DISABLE
