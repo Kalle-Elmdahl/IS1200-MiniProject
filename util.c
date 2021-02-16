@@ -67,11 +67,11 @@ void draw_text(int x, int y, char *s) {
 }
 
 void draw_rect(int x, int y, int w, int h) {
-    if(x < 0 || y < 0 || w < 0 || h < 0) return;
-    if(x + w > DISPLAY_WIDTH || y + h > DISPLAY_HEIGHT) return;
+    if(x < 0 || y < 0 || w < 1 || h < 1) return; // control input
+    if(x + w > DISPLAY_WIDTH || y + h > DISPLAY_HEIGHT) return; // control input
     int i, j;
-    for(i = 0; i <= w; i++)
-        for(j = 0; j <= h; j++)
+    for(i = 0; i < w; i++)
+        for(j = 0; j < h; j++)
             pixels[j + y][i + x] ^= 1;
 }
 

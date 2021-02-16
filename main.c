@@ -25,7 +25,7 @@ void update() {
     if (IFS(0) & 0x100) {
 
 		timeoutcount++;
-		IFS(0) = 0;
+		IFSCLR(0) = 0x100;
         check_user_inputs();
         (*E)++;
 
