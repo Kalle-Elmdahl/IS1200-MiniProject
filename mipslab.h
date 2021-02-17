@@ -51,8 +51,10 @@ struct Snake_Body {
     int x, y;
 };
 
+uint8_t player_1x [24]; // Initalize array outside of struct because of reasons
+
 struct Snake { 
-    uint8_t x [12];
+    uint8_t *x;
     uint8_t y [12];
     uint8_t direction; // Bits 0->3: Left, Up, Down, Right
     uint8_t next_direction; // Bits 0->3: Left, Up, Down, Right
