@@ -28,6 +28,10 @@ enum app_states app_state;
 enum game_states {IN_GAME, GAME_OVER} game_state;
 enum game_states game_state;
 
+/* Global variables */
+uint8_t player_1x [120]; // Initalize array outside of struct because reasons
+uint8_t player_1y [120]; // Initalize array outside of struct because reasons
+
 /* setup.c */
 void setup_ports( void );
 void setup_display( void );
@@ -51,11 +55,9 @@ struct Snake_Body {
     int x, y;
 };
 
-uint8_t player_1x [24]; // Initalize array outside of struct because of reasons
-
 struct Snake { 
     uint8_t *x;
-    uint8_t y [12];
+    uint8_t *y;
     uint8_t direction; // Bits 0->3: Left, Up, Down, Right
     uint8_t next_direction; // Bits 0->3: Left, Up, Down, Right
     uint8_t should_grow;

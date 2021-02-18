@@ -15,6 +15,7 @@ struct Snake initialize_snake() {
     snake.next_direction = snake.direction;
     snake.length = SNAKE_INITIAL_LENGTH;
     snake.x = player_1x;
+    snake.y = player_1y;
     int i;
 
     for (i = 0; i < SNAKE_INITIAL_LENGTH; i++) {
