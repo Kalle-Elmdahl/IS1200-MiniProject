@@ -110,6 +110,7 @@ void setup_user_inputs() {
     // Initialize port D, set bits 11-5 as inputs.
     // same principle as above, bits that are "1" are inputs
     TRISDSET = 0xfe0;
+	TRISDSET = 0x1 << 11; // chipkit pin 35
     TRISFSET = 0x2; //Button 1
 }
 

@@ -8,6 +8,8 @@ void check_for_start(int sws, int btns);
 void check_user_inputs() {
     int sws = (PORTD >> 8) & 0xF; // Switch infromation from port D
     int btns = (PORTD >> 4) & 0xE | (PORTF >> 1) & 0x1; // Button infromation from port D (btn 2-4) and F (btn 1)
+    int chipkit35 = (PORTD >> 10) & 0x1; // information from chipkit 35
+
 
     switch(app_state) {
         case START_PAGE:
@@ -16,7 +18,7 @@ void check_user_inputs() {
         case MENU:
             break;
         case GAME:
-            check_game_buttons(btns);
+            check_game_buttons(btns, chipkit35);
             break;
     }
 
@@ -28,7 +30,7 @@ void check_user_inputs() {
     }
 }
 
-void check_game_buttons(int btns) {
+void check_game_buttons(int btns, int chipkit35) {
     // Button 1
     if (btns & 0x1 && player1.direction != 0b1000)
         player1.next_direction = 0b1;
@@ -42,7 +44,7 @@ void check_game_buttons(int btns) {
         player1.next_direction = 0b100;
 
     // Button 4
-    if (btns & 0x8 && player1.direction !=0b1)
+    if ((btns & 0x8) || (chipkit35 & 0x1) && player1.direction !=0b1)
         player1.next_direction = 0b1000;
 }
 
