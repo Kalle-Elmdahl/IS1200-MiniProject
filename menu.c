@@ -6,9 +6,9 @@
 void draw_menu() {
 
     /* Game menu */
-    if (menu_select == 0 && game_mode == ONE_PLAYER)
+    if (menu_select == 0 && game_mode == ONE_PLAYER && game_mode != GAME_OVER)
         draw_text(5, 1, "Resume 1 Player game");
-    else if (menu_select == 0 && game_mode == NO_GAME)
+    else if (menu_select == 0 && game_mode == NO_GAME || game_state == GAME_OVER)
         draw_text(5, 1, "Start 1 Player game");
     else if (menu_select == 1)
         draw_text(5, 1, "2 Player");

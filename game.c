@@ -35,8 +35,7 @@ void calculate_next_frame() {
 }
 
 void draw_game() {
-    game_mode = ONE_PLAYER;
-    
+
     // Sidebar
     draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);
     draw_image(MAX_X - 17, 1, 9, 16, &lever_down[0][0]);
@@ -56,7 +55,7 @@ void draw_game() {
 
 void game_over() {
     game_state = GAME_OVER;
-    game_mode == NO_GAME;
+    game_mode = NO_GAME;
 }
 
 void display_game_over() {
