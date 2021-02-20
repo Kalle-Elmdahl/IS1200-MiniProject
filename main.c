@@ -28,7 +28,7 @@ void update() {
         check_user_inputs();
         (*E)++;
 
-		if (timeoutcount == 5) {
+		if (timeoutcount == 10) {
             // update game every second
             
             clear_pixels();

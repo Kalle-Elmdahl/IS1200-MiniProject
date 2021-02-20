@@ -31,6 +31,7 @@ enum game_states game_state;
 /* Global variables */
 uint8_t player_1x [120]; // Initalize array outside of struct because reasons
 uint8_t player_1y [120]; // Initalize array outside of struct because reasons
+// int gamespeed = 5; // 0 = Slowest, 9 = Fastest
 
 /* setup.c */
 void setup_ports( void );
