@@ -24,6 +24,7 @@ void display_apple() {
 
 int is_eating(struct Snake snake) {
     if(snake.x[0] == apple.x && snake.y[0] == apple.y) {
+        (*E)++;
         new_apple();
         return 1;
     }

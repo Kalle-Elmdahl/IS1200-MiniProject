@@ -112,7 +112,7 @@ void setup_user_inputs() {
     TRISDSET = 0xfe0;
 	TRISFSET = 0x2; //Button 1
 
-	TRISDSET = 0x3; // chipkit pin 3 & 5
+	TRISDSET = 0xf; // PLAYER 2 INPUTS: Chipkit pin 3, 5, 6  & 9 -> RD0->RD3
 }
 
 void setup_clock() {

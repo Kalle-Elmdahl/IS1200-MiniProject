@@ -12,6 +12,7 @@ int main(void) {
     clear_pixels();
     update_display();
     app_state = START_PAGE;
+    game_mode == NO_GAME;
 
     setup_leds();
     setup_user_inputs();
@@ -26,9 +27,9 @@ void update() {
 		timeoutcount++;
 		IFSCLR(0) = 0x100;
         check_user_inputs();
-        (*E)++;
+        //(*E)++;
 
-		if (timeoutcount == 10) {
+		if (timeoutcount == 5) {
             // update game every second
             
             clear_pixels();

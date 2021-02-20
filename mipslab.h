@@ -14,6 +14,7 @@
 #define DISPLAY_ROW_HEIGHT DISPLAY_HEIGHT / DISPLAY_ROWS
 #define MAX_X 127
 #define MAX_Y 31
+#define MAX_MENU_SELECT 1
 
 /* UI */
 #define SIDEBAR_WIDTH 25
@@ -28,10 +29,14 @@ enum app_states app_state;
 enum game_states {IN_GAME, GAME_OVER} game_state;
 enum game_states game_state;
 
+enum game_modes {NO_GAME, ONE_PLAYER, TWO_PLAYER, AI} game_mode;
+enum game_modes game_mode;
+
 /* Global variables */
 uint8_t player_1x [120]; // Initalize array outside of struct because reasons
 uint8_t player_1y [120]; // Initalize array outside of struct because reasons
 // int gamespeed = 5; // 0 = Slowest, 9 = Fastest
+// uint8_t game_mode = 0;
 
 /* setup.c */
 void setup_ports( void );
@@ -80,6 +85,7 @@ struct Apple {
 
 /* io.c */
 void check_buttons();
+void check_menu_buttons(int btns);
 
 /* main.c */
 extern uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
@@ -87,6 +93,8 @@ void update( void );
 
 /* menu.c */
 void draw_menu( void );
+uint8_t menu_select;
+uint8_t one_player_game_running;
 
 /* startpage.c */
 void draw_start_page();

@@ -22,8 +22,6 @@ struct Snake initialize_snake() {
         snake.x[i] = INITIAL_X - i * SNAKE_WIDTH;
         snake.y[i] = INITIAL_Y;
     }
-
-
     return snake;
 }
 
