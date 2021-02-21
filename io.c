@@ -53,6 +53,9 @@ void check_game_buttons(int btns) {
     if ((btns & 0x8) && player1.direction != 'r')
         player1.next_direction = 'l';
 
+    if (game_mode == AI)
+        player2.next_direction = get_AI_direction();
+
     if (game_mode != TWO_PLAYER)
         return;
 

@@ -52,7 +52,7 @@ void display_snake(struct Snake snake) {
     }
 }
 
-struct Snake update_snake(struct Snake snake) {
+struct Snake update_snake(struct Snake snake, struct Snake other_snake) {
     int i;
     if(snake.should_grow == 1) {
         snake.length = snake.length + 1;
@@ -60,7 +60,7 @@ struct Snake update_snake(struct Snake snake) {
         new_obstacle();
     }
 
-    for (i = snake.length - 1; i > 0; i--) {
+    for (i = snake.length; i > 0; i--) {
         snake.x[i] = snake.x[i - 1];
         snake.y[i] = snake.y[i - 1];
     }
@@ -83,19 +83,23 @@ struct Snake update_snake(struct Snake snake) {
             break;
     }
 
-    if(is_valid_snake(snake) == 0) game_over();
+    if(is_valid_snake(snake, other_snake) == 0) game_over();
     
     return snake;
 }
 
-int is_valid_snake(struct Snake snake) {
+int is_valid_snake(struct Snake snake, struct Snake other_snake) {
     if( snake.x[0] < 1 || 
         snake.y[0] < 1 || 
         snake.x[0] + SNAKE_SIZE > DISPLAY_WIDTH - SIDEBAR_WIDTH || 
         snake.y[0] + SNAKE_SIZE > DISPLAY_HEIGHT) return 0; // Snake is outside of world
     int i;
-    for(i = 4; i < snake.length; i++) // first body part able to collide is the forth, (i = 4)
+    for(i = 4; i <= snake.length; i++) // first body part able to collide is the forth, (i = 4)
         if(snake.x[0] == snake.x[i] && snake.y[0] == snake.y[i]) return 0; // Snake is colliding with itself
+
+    if(game_mode == TWO_PLAYER || game_mode == AI)
+        for(i = 0; i <= other_snake.length; i++)
+            if(snake.x[0] == other_snake.x[i] && snake.y[0] == other_snake.y[i]) return 0;
 
     if (snake.x[0] == obstacle.x && snake.y[0] == obstacle.y) return 0; // Snake is colliding with obstacle
 

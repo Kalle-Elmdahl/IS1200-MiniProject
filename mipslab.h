@@ -71,9 +71,12 @@ struct Snake {
     int length;
 };
 
+/* AI */
+char get_AI_direction();
+
 struct Snake initialize_snake( uint8_t );
 void display_snake(struct Snake);
-struct Snake update_snake(struct Snake);
+struct Snake update_snake(struct Snake, struct Snake);
 
 /* Apple.c */
 void new_apple( void );
@@ -87,7 +90,6 @@ struct Apple {
 /* Obstacles.c */
 void new_obstacle (void);
 void display_obstacle (void);
-int is_colliding (struct Snake snake);
 struct Obstacle { 
     uint8_t x;
     uint8_t y;

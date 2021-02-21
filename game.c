@@ -14,7 +14,7 @@ void display_game_over( void );
 void game_init() {
     player1 = initialize_snake(0);
 
-    if (menu_select == ONE_PLAYER)
+    if (menu_select == SELECT_ONE_PLAYER)
         game_mode = ONE_PLAYER;
 
     if (menu_select == SELECT_TWO_PLAYER) {
@@ -22,10 +22,16 @@ void game_init() {
         game_mode = TWO_PLAYER;
     }
 
+    if (menu_select == SELECT_AI) {
+        player2 = initialize_snake(1);
+        game_mode = AI;
+    }
+
     game_state = IN_GAME;
     new_apple();
     new_obstacle();
 }
+
 
 void game_update() {   
     if(game_state == IN_GAME) calculate_next_frame();
@@ -37,17 +43,16 @@ void game_update() {
             display_game_over();
             break;
     }     
-
 }
 
 void calculate_next_frame() {
-    player1 = update_snake(player1);
+    player1 = update_snake(player1, player2);
     
     if(is_eating(player1))
         player1.should_grow = 1;
 
-    if(game_mode == TWO_PLAYER) {
-        player2 = update_snake(player2);
+    if(game_mode == TWO_PLAYER || game_mode == AI) {
+        player2 = update_snake(player2, player1);
         if(is_eating(player2))
             player2.should_grow = 1;
     }
@@ -62,7 +67,7 @@ void draw_game() {
 
     // Props
     display_snake(player1);
-    if(game_mode == TWO_PLAYER)
+    if(game_mode == TWO_PLAYER || game_mode == AI)
         display_snake(player2);
     
     display_apple();
