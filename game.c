@@ -5,6 +5,7 @@
 struct Snake player1;
 struct Snake player2;
 struct Apple apple;
+struct Obstacle obstacle;
 
 void calculate_next_frame( void );
 void draw_game( void );
@@ -23,6 +24,7 @@ void game_init() {
 
     game_state = IN_GAME;
     new_apple();
+    new_obstacle();
 }
 
 void game_update() {   
@@ -64,6 +66,7 @@ void draw_game() {
         display_snake(player2);
     
     display_apple();
+    display_obstacle();
 
 
     // Borders

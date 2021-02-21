@@ -47,7 +47,7 @@ struct Snake initialize_snake(uint8_t player) {
 void display_snake(struct Snake snake) {
     int i;
 
-    for (i = 0; i <= snake.length; i++) {
+    for (i = 0; i < snake.length; i++) {
         draw_rect(snake.x[i], snake.y[i], SNAKE_SIZE, SNAKE_SIZE);
     }
 }
@@ -57,6 +57,7 @@ struct Snake update_snake(struct Snake snake) {
     if(snake.should_grow == 1) {
         snake.length = snake.length + 1;
         snake.should_grow = 0;
+        new_obstacle();
     }
 
     for (i = snake.length - 1; i > 0; i--) {
@@ -95,5 +96,7 @@ int is_valid_snake(struct Snake snake) {
     int i;
     for(i = 4; i < snake.length; i++) // first body part able to collide is the forth, (i = 4)
         if(snake.x[0] == snake.x[i] && snake.y[0] == snake.y[i]) return 0; // Snake is colliding with itself
+
+    if (snake.x[0] == obstacle.x && snake.y[0] == obstacle.y) return 0;
     return 1;
 }

@@ -53,6 +53,7 @@ void setup_clock( void );
 struct Snake player1;
 struct Snake player2;
 struct Apple apple;
+struct Obstacle obstacle;
 void game_init( void );
 void game_update( void );
 void game_over( void );
@@ -79,6 +80,15 @@ void new_apple( void );
 void display_apple( void );
 int is_eating(struct Snake);
 struct Apple { 
+    uint8_t x;
+    uint8_t y;
+};
+
+/* Obstacles.c */
+void new_obstacle (void);
+void display_obstacle (void);
+int is_colliding (struct Snake snake);
+struct Obstacle { 
     uint8_t x;
     uint8_t y;
 };
@@ -117,3 +127,4 @@ extern const uint8_t const font[128][CHAR_WIDTH];
 extern const uint8_t const lever_up[16][9];
 extern const uint8_t const lever_down[16][9];
 const uint8_t const apple_icon[3][3];
+const uint8_t const sq_obstacle[5][5];
