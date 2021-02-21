@@ -181,3 +181,9 @@ const uint8_t const apple_icon[3][3] = {
     {1, 1, 1},
     {0, 1, 0},
 };
+
+const uint8_t const apple_icon[3][3] = {
+    {0, 1, 0},
+    {1, 1, 1},
+    {0, 1, 0},
+};

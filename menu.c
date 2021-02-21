@@ -11,8 +11,8 @@ void draw_menu() {
     draw_text(5, 1, menu_text);
 
     /* Sidebar */
-    draw_rect(DISPLAY_WIDTH - 1 - 23, 0, 23, DISPLAY_HEIGHT);
-    draw_image(DISPLAY_WIDTH - 1 - 16, 1, 9, 16, &lever_up[0][0]);
+    draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);
+    draw_image(MAX_X - 17, 1, 9, 16, &lever_up[0][0]);
     draw_text(DISPLAY_WIDTH - 22, 3, "Play!");
 
     /* Bottom bar */
