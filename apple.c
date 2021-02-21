@@ -10,14 +10,14 @@ void new_apple() {
         apple.x = (TMR1 % (DISPLAY_WIDTH - 1 - SIDEBAR_WIDTH) / SNAKE_SIZE) * SNAKE_SIZE + 1; // Magic to align the apple
         apple.y = (TMR1 % ((DISPLAY_HEIGHT - 2) / SNAKE_SIZE)) * SNAKE_SIZE + 1; // Magic pt 2
         for(i = 0; i < player1.length; i++) {
-            if(player1.x[i] == apple.x && player1.y[i] == apple.y) {
+            if(player1.x[i] == apple.x && player1.y[i] == apple.y || apple.x == obstacle.x && apple.y == obstacle.y) {
                 valid_pos = 0;
                 break;
             }
         }
         if(game_mode == TWO_PLAYER && valid_pos) {
             for(i = 0; i < player2.length; i++) {
-                if(player2.x[i] == apple.x && player2.y[i] == apple.y) {
+                if(player2.x[i] == apple.x && player2.y[i] == apple.y || apple.x == obstacle.x && apple.y == obstacle.y) {
                     valid_pos = 0;
                     break;
                 }

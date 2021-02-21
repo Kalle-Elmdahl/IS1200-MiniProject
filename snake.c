@@ -97,6 +97,7 @@ int is_valid_snake(struct Snake snake) {
     for(i = 4; i < snake.length; i++) // first body part able to collide is the forth, (i = 4)
         if(snake.x[0] == snake.x[i] && snake.y[0] == snake.y[i]) return 0; // Snake is colliding with itself
 
-    if (snake.x[0] == obstacle.x && snake.y[0] == obstacle.y) return 0;
+    if (snake.x[0] == obstacle.x && snake.y[0] == obstacle.y) return 0; // Snake is colliding with obstacle
+
     return 1;
 }

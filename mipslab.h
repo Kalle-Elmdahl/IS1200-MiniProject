@@ -91,6 +91,7 @@ int is_colliding (struct Snake snake);
 struct Obstacle { 
     uint8_t x;
     uint8_t y;
+    uint8_t animation;
 };
 
 /* io.c */
@@ -128,3 +129,4 @@ extern const uint8_t const lever_up[16][9];
 extern const uint8_t const lever_down[16][9];
 const uint8_t const apple_icon[3][3];
 const uint8_t const sq_obstacle[5][5];
+const uint8_t const sq_obstacle_animation[5][5];

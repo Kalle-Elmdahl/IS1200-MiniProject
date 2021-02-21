@@ -23,15 +23,15 @@ void new_obstacle() {
             }
         }
     } while(valid_pos == 0);
+
+    obstacle.animation = 0;
 }
 
 void display_obstacle() {
-    draw_image(obstacle.x, obstacle.y, 5, 5, &sq_obstacle[0][0]);
-}
-
-int is_colliding(struct Snake snake) {
-    if(snake.x[0] == obstacle.x && snake.y[0] == obstacle.y) {
-        // Kill snake
-    }
-    return 0;
+    if (obstacle.animation == 0)
+        draw_image(obstacle.x, obstacle.y, 5, 5, &sq_obstacle[0][0]);
+    else
+        draw_image(obstacle.x, obstacle.y, 5, 5, &sq_obstacle_animation[0][0]);
+    
+    obstacle.animation = (obstacle.animation + 1) % 2;
 }
