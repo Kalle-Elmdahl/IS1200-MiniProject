@@ -6,30 +6,49 @@
 
 #define SNAKE_INITIAL_LENGTH 4 // Defines the inital length of the snake
 
-#define INITIAL_X 1 + (SNAKE_SIZE * 10) // Defines the starting x-coordinate
-#define INITIAL_Y 1 + (SNAKE_SIZE * 3) // Defines the starting y-coordinate
+enum INITIAL_POSITIONS {
+    x1 = (1 + SNAKE_SIZE * 10), 
+    y1 = (1 + (SNAKE_SIZE * 3)),
+    x2 = (1 + MAX_X - SIDEBAR_WIDTH - SNAKE_SIZE * 10), 
+    y2 = (1 + (SNAKE_SIZE * 3))
+};
 
-struct Snake initialize_snake() {
-    struct Snake snake; // Declare Snake of Player 1
-    snake.direction = 0b1; // Bits <3:0>: Left, Up, Down, Right
-    snake.next_direction = snake.direction;
+static const enum INITIAL_POSITIONS INITIAL_X_POSITIONS[] = {x1, x2};
+static const enum INITIAL_POSITIONS INITIAL_Y_POSITIONS[] = {y1, y2};
+
+struct Snake initialize_snake(uint8_t player) {
+    struct Snake snake; // Declare Snake
     snake.length = SNAKE_INITIAL_LENGTH;
-    snake.x = player_1x;
-    snake.y = player_1y;
-    int i;
 
-    for (i = 0; i < SNAKE_INITIAL_LENGTH; i++) {
-        snake.x[i] = INITIAL_X - i * SNAKE_WIDTH;
-        snake.y[i] = INITIAL_Y;
+    if (player == 0) {
+        snake.x = player_1x;
+        snake.y = player_1y;
+    } else {
+        snake.x = player_2x;
+        snake.y = player_2y;
     }
+
+    int i;
+    /* Determine the starting positions and starting direction for the players */
+
+    for (i = 0; i <= SNAKE_INITIAL_LENGTH; i++) {
+        snake.x[i] = INITIAL_X_POSITIONS[player] + (player == 0 ?  -i * SNAKE_WIDTH : i * SNAKE_WIDTH);
+        snake.y[i] = INITIAL_Y_POSITIONS[player];
+    }
+
+    if (player == 0) snake.direction = 'r'; // l = left, u = up, d = down, r = right
+    else snake.direction = 'l';
+    
+    snake.next_direction = snake.direction;
+
     return snake;
 }
 
 void display_snake(struct Snake snake) {
     int i;
 
-    for (i = 0; i < snake.length; i++) {
-        draw_rect(snake.x[i], snake.y[i], SNAKE_WIDTH, SNAKE_WIDTH);
+    for (i = 0; i <= snake.length; i++) {
+        draw_rect(snake.x[i], snake.y[i], SNAKE_SIZE, SNAKE_SIZE);
     }
 }
 
@@ -49,16 +68,16 @@ struct Snake update_snake(struct Snake snake) {
 
     // snake head
     switch (snake.direction) {
-        case 0b1:
+        case 'r':
             snake.x[0] = snake.x[0] + SNAKE_WIDTH;
             break;
-        case 0b10:
+        case 'd':
             snake.y[0] = snake.y[0] + SNAKE_WIDTH;
             break;
-        case 0b100:
+        case 'u':
             snake.y[0] = snake.y[0] - SNAKE_WIDTH;
             break;
-        case 0b1000:
+        case 'l':
             snake.x[0] = snake.x[0] - SNAKE_WIDTH;
             break;
     }

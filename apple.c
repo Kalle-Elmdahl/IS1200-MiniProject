@@ -15,6 +15,14 @@ void new_apple() {
                 break;
             }
         }
+        if(game_mode == TWO_PLAYER && valid_pos) {
+            for(i = 0; i < player2.length; i++) {
+                if(player2.x[i] == apple.x && player2.y[i] == apple.y) {
+                    valid_pos = 0;
+                    break;
+                }
+            }
+        }
     } while(valid_pos == 0);
 }
 

@@ -3,6 +3,7 @@
 #include "mipslab.h"
 
 struct Snake player1;
+struct Snake player2;
 struct Apple apple;
 
 void calculate_next_frame( void );
@@ -10,7 +11,16 @@ void draw_game( void );
 void display_game_over( void );
 
 void game_init() {
-    player1 = initialize_snake();
+    player1 = initialize_snake(0);
+
+    if (menu_select == ONE_PLAYER)
+        game_mode = ONE_PLAYER;
+
+    if (menu_select == SELECT_TWO_PLAYER) {
+        player2 = initialize_snake(1);
+        game_mode = TWO_PLAYER;
+    }
+
     game_state = IN_GAME;
     new_apple();
 }
@@ -30,8 +40,15 @@ void game_update() {
 
 void calculate_next_frame() {
     player1 = update_snake(player1);
+    
     if(is_eating(player1))
         player1.should_grow = 1;
+
+    if(game_mode == TWO_PLAYER) {
+        player2 = update_snake(player2);
+        if(is_eating(player2))
+            player2.should_grow = 1;
+    }
 }
 
 void draw_game() {
@@ -43,6 +60,9 @@ void draw_game() {
 
     // Props
     display_snake(player1);
+    if(game_mode == TWO_PLAYER)
+        display_snake(player2);
+    
     display_apple();
 
 
@@ -55,7 +75,6 @@ void draw_game() {
 
 void game_over() {
     game_state = GAME_OVER;
-    game_mode = NO_GAME;
 }
 
 void display_game_over() {

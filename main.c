@@ -12,7 +12,6 @@ int main(void) {
     clear_pixels();
     update_display();
     app_state = START_PAGE;
-    game_mode == NO_GAME;
 
     setup_leds();
     setup_user_inputs();

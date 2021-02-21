@@ -104,6 +104,8 @@ void setup_leds() {
     // and initialize the value of lights to 0
     E = (volatile int*) 0xbf886110; // PORTE
     *E = 15;
+
+	(*E) = 0;
 }
 
 void setup_user_inputs() {
