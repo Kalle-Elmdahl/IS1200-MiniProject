@@ -3,12 +3,23 @@
 #include "mipslab.h"
 
 void get_menu_text();
+const struct menu_item menu_items[4];
+int current_menu_position = 0;
 
  
 void draw_menu() {
     /* Game menu */
-    get_menu_text(); 
-    draw_text(5, 1, menu_text);
+    int text_position_x = (DISPLAY_WIDTH - SIDEBAR_WIDTH) / 2 - menu_items[current_menu_position].text_width / 2;
+
+    if(current_menu_position != 0) draw_image(text_position_x - 3 - 3, 10, 3, 5, &arrow_left[0][0]);
+
+    
+    draw_text(text_position_x, 1, menu_items[current_menu_position].text); 
+
+    if(current_menu_position != number_of_menu_items - 1)
+        draw_image(menu_items[current_menu_position].text_width + text_position_x + 3, 10, 3, 5, &arrow_right[0][0]); 
+    
+
 
     /* Sidebar */
     draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);
@@ -16,33 +27,48 @@ void draw_menu() {
     draw_text(DISPLAY_WIDTH - 22, 3, "Play!");
 
     /* Bottom bar */
-    draw_rect(0, DISPLAY_HEIGHT - 9, DISPLAY_WIDTH - 24, 9);
-    draw_text(5, 3, "<- | -> | Select");
+    draw_rect(0, DISPLAY_HEIGHT - 8, DISPLAY_WIDTH - SIDEBAR_WIDTH, 8);
+    draw_image(3, DISPLAY_HEIGHT - 6, 3, 5, &arrow_left[0][0]);
+    draw_image(10, DISPLAY_HEIGHT - 6, 3, 5, &arrow_right[0][0]);
+    draw_text(15, 3, "Select");
     
 }
 
-void get_menu_text() {
-
-    /* Determine menu text */ 
-    if (menu_select == SELECT_ONE_PLAYER) {
-        if (game_state == IN_GAME && game_mode == ONE_PLAYER) menu_text = "Resume 1 player game";
-        else menu_text = "Start 1 player game";
+void select_current_menu_item() {
+    if(menu_items[current_menu_position].sub_menu != -1) {
+        current_sub_menu = menu_items[current_menu_position].sub_menu;
+        app_state = SUB_MENU;
+        init_sub_menu();
     }
-
-    if (menu_select == SELECT_TWO_PLAYER) {
-        if (game_state == IN_GAME && game_mode == TWO_PLAYER) menu_text = "Resume 2 player game";
-        else menu_text = "Start 2 player game";
-    }
-
-    if (menu_select == SELECT_AI) {
-        if (game_state == IN_GAME && game_mode == AI) menu_text = "Resume AI game";
-        else menu_text = "Start AI";
-    }
-
-    if (menu_select == SELECT_HIGHSCORE)
-        menu_text = "Highscore";
-
-    if (menu_select == SELECT_CREDITS)
-        menu_text = "Credits";
-
 }
+
+// char *text;
+// int text_width;
+// int sub_menu;
+// int action;
+const struct menu_item menu_items[4] = {
+    {
+        "Restart game",
+        52,
+        -1,
+        -1
+    },
+    {
+        "Game mode",
+        40,
+        0,
+        -1
+    },
+    {
+        "Speed",
+        22,
+        1,
+        -1
+    },
+    {
+        "Credits",
+        31,
+        -1,
+        -1
+    },
+};

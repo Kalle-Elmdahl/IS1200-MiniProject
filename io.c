@@ -2,38 +2,46 @@
 #include <pic32mx.h>
 #include "mipslab.h"
 
-void check_game_buttons(int btns);
-void check_for_start(int sws, int btns);
+void check_for_start();
+void check_game_buttons();
+void check_menu_buttons();
+void check_sub_menu_buttons();
+int last_btns = 0, btns = 0, sws = 0, clicks = 0;
 
 void check_user_inputs() {
-    int sws = (PORTD >> 8) & 0xF; // Switch infromation from port D
-    int btns = (PORTD >> 4) & 0xE | (PORTF >> 1) & 0x1; // Button infromation from port D (btn 2-4) and F (btn 1)
+    sws = (PORTD >> 8) & 0xF; // Switch infromation from port D
+    btns = (PORTD >> 4) & 0xE | (PORTF >> 1) & 0x1; // Button infromation from port D (btn 2-4) and F (btn 1)
     // player2
     btns |= (PORTD << 4) & 0xf0; // Player 2 buttons are located at Port D (chipkit pin 3, 5, 6 & 9) 0->3
+    clicks = btns & ~last_btns;
 
 
     switch(app_state) {
         case START_PAGE:
-            check_for_start(sws, btns);
+            check_for_start();
             return;
         case MENU:
-            check_menu_buttons(btns);
+            check_menu_buttons();
+            break;
+        case SUB_MENU:
+            check_sub_menu_buttons();
             break;
         case GAME:
-            check_game_buttons(btns);
+            check_game_buttons();
             break;
     }
 
     if(sws & 0b1) {
         if(app_state == MENU && game_state == GAME_OVER) game_init(); // Conditions for starting the game
         app_state = GAME;
-    } else {
+    } else if(!(sws & 0b1) && app_state == GAME) {
         app_state = MENU;
     }
+    last_btns = btns;
 }
 
 
-void check_game_buttons(int btns) {
+void check_game_buttons() {
 
     /* Player 1 buttons */
 
@@ -56,8 +64,7 @@ void check_game_buttons(int btns) {
     if (game_mode == AI)
         player2.next_direction = get_AI_direction();
 
-    if (game_mode != TWO_PLAYER)
-        return;
+    if (game_mode != TWO_PLAYER) return;
 
     /* Player 2 buttons */
 
@@ -79,20 +86,33 @@ void check_game_buttons(int btns) {
 
 }
 
-void check_menu_buttons(int btns) {
+void check_menu_buttons() {
 
-    if (btns & 0x1) menu_select ++;  // right button
-    if (btns & 0x8) menu_select --;  // left button
+    if (clicks & 0x8 && current_menu_position > 0) 
+        current_menu_position--;  // left button
+    
+    if (clicks & 0x4 && current_menu_position < number_of_menu_items - 1) 
+        current_menu_position++;  // right button
+    
+    if (clicks & 0x2) select_current_menu_item();  // Select button
 
+}
+
+void check_sub_menu_buttons() {
+    if (clicks & 0x1) {
+        app_state = MENU;  // Back button
+        return;
+    }
+    update_sub_menu(clicks);
 }
 
 
 
-void check_for_start(int sws, int btns) {
+void check_for_start() {
     // The applications should start if all switches are down and any button is pressed
     if(!sws && btns > 0) {
         app_state = MENU;
         game_state = GAME_OVER;
-        menu_select = SELECT_ONE_PLAYER; // Set menu to 1 player default
+        game_mode = ONE_PLAYER; // Set game mode to 1 player default
     }
 }

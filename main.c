@@ -26,7 +26,7 @@ void update() {
 		timeoutcount++;
 		IFSCLR(0) = 0x100;
         check_user_inputs();
-        //(*E)++;
+        (*E)++;
 
 		if (timeoutcount == 5) {
             // update game every second
@@ -38,6 +38,9 @@ void update() {
                     break;
                 case MENU:
                     draw_menu();
+                    break;
+                case SUB_MENU:
+                    draw_sub_menu();
                     break;
                 case GAME:
                     game_update();

@@ -14,18 +14,8 @@ void display_game_over( void );
 void game_init() {
     player1 = initialize_snake(0);
 
-    if (menu_select == SELECT_ONE_PLAYER)
-        game_mode = ONE_PLAYER;
-
-    if (menu_select == SELECT_TWO_PLAYER) {
+    if (game_mode == TWO_PLAYER || game_mode == AI)
         player2 = initialize_snake(1);
-        game_mode = TWO_PLAYER;
-    }
-
-    if (menu_select == SELECT_AI) {
-        player2 = initialize_snake(1);
-        game_mode = AI;
-    }
 
     game_state = IN_GAME;
     new_apple();

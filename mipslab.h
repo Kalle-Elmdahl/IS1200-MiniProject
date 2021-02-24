@@ -22,7 +22,7 @@
 #define CHAR_WIDTH 7
 
 /* Enumerator for different parts of the appliceation */
-enum app_states {START_PAGE, MENU, GAME} app_state;
+enum app_states {START_PAGE, MENU, SUB_MENU, GAME} app_state;
 enum app_states app_state;
 
 enum game_states {IN_GAME, GAME_OVER} game_state;
@@ -30,9 +30,6 @@ enum game_states game_state;
 
 enum game_modes {ONE_PLAYER, TWO_PLAYER, AI} game_mode;
 enum game_modes game_mode;
-
-enum menu_selects {SELECT_ONE_PLAYER, SELECT_TWO_PLAYER, SELECT_AI, SELECT_HIGHSCORE, SELECT_CREDITS} menu_select;
-enum menu_selects menu_select;
 
 /* Global variables */
 uint8_t player_1x [120]; // Initalize array outside of struct because reasons
@@ -88,8 +85,8 @@ struct Apple {
 };
 
 /* Obstacles.c */
-void new_obstacle (void);
-void display_obstacle (void);
+void new_obstacle ( void );
+void display_obstacle ( void );
 struct Obstacle { 
     uint8_t x;
     uint8_t y;
@@ -98,7 +95,6 @@ struct Obstacle {
 
 /* io.c */
 void check_buttons();
-void check_menu_buttons(int btns);
 
 /* main.c */
 extern uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
@@ -106,11 +102,26 @@ void update( void );
 
 /* menu.c */
 void draw_menu( void );
-char* next_menu;
-char* menu_text;
+void select_current_menu_item( void );
+struct menu_item {
+    char *text;
+    int text_width;
+    int sub_menu;
+    int action;
+};
+extern int current_menu_position;
+#define number_of_menu_items 4
+
+/* submenu.c */
+enum sub_menus {GAME_MODE, SPEED} current_sub_menu;
+enum sub_menus current_sub_menu;
+
+void init_sub_menu( void );
+void draw_sub_menu( void );
+void update_sub_menu(int btns);
 
 /* startpage.c */
-void draw_start_page();
+void draw_start_page( void );
 
 /* util.c */
 void update_display( void );
@@ -129,6 +140,11 @@ extern uint8_t text[DISPLAY_ROWS][DISPLAY_WIDTH];
 extern const uint8_t const font[128][CHAR_WIDTH];
 extern const uint8_t const lever_up[16][9];
 extern const uint8_t const lever_down[16][9];
+const uint8_t const arrow_right[5][3];
+const uint8_t const arrow_left[5][3];
+const uint8_t const arrow_up[3][5];
+const uint8_t const arrow_down[3][5];
 const uint8_t const apple_icon[3][3];
+const uint8_t const check_box[5][6];
 const uint8_t const sq_obstacle[5][5];
 const uint8_t const sq_obstacle_animation[5][5];
