@@ -8,10 +8,12 @@ void highscore_read() {
     char entry[HIGHSCORE_LENGTH + 2];
     entry[HIGHSCORE_LENGTH + 1] = 0; // NUL char
     i2c_start();
+    /*
     i2c_send(EEPROM_WRITE);
     i2c_send(EEPROM_MEM_ADD >> 2);
     i2c_send(EEPROM_MEM_ADD);
     i2c_restart();
+    */
     i2c_send(EEPROM_READ);
     entry[0] = i2c_recv();
 
