@@ -3,8 +3,6 @@
 #include "mipslab.h"  /* Declatations for game */
 #include "i2c-defs.h" /* Declarations of I2C-specific addresses */
 
-int highscore_offset;
-
 void highscore_read() {
     highscore_offset = 1;
     char entry[HIGHSCORE_LENGTH + 2];
@@ -12,7 +10,7 @@ void highscore_read() {
     i2c_start();
     i2c_send(EEPROM_WRITE);
     i2c_send(EEPROM_MEM_ADD >> 2);
-    i2c_send(EEPROM_MEM_ADD + highscore_offset * HIGHSCORE_LENGTH);
+    i2c_send(EEPROM_MEM_ADD);
     i2c_restart();
     i2c_send(EEPROM_READ);
     entry[0] = i2c_recv();
