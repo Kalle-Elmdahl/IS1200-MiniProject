@@ -16,6 +16,8 @@ void highscore_read() {
     i2c_restart();
     i2c_send(EEPROM_READ);
     entry[0] = i2c_recv();
+
+    /*
     
     int i;
     
@@ -29,6 +31,8 @@ void highscore_read() {
         entry[i] = i2c_recv();
     }
     i2c_stop();
+
+    */
 
     draw_text(10,10,entry);
 }
