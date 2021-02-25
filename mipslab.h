@@ -116,12 +116,9 @@ extern int current_menu_position;
 #define number_of_menu_items 5
 
 /* submenu.c */
-<<<<<<< Updated upstream
 enum sub_menus {GAME_MODE, SPEED, HIGHSCORE} current_sub_menu;
 enum sub_menus current_sub_menu;
 
-=======
->>>>>>> Stashed changes
 void init_sub_menu( void );
 void draw_sub_menu( void );
 void update_sub_menu(int btns);
