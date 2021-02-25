@@ -81,5 +81,5 @@ void update_speed(int btns) {
 }
 
 void draw_highscore() {
-    highscore_read()
+    highscore_read();
 }

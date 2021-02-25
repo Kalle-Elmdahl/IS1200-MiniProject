@@ -1,9 +1,12 @@
 #include <stdint.h>   /* Declarations of uint_32 and the like */
 #include <pic32mx.h>  /* Declarations of system-specific addresses etc */
-#include "chipsnake.h"  /* Declatations for game */
+#include "mipslab.h"  /* Declatations for game */
 #include "i2c-defs.h" /* Declarations of I2C-specific addresses */
 
+int highscore_offset;
+
 void highscore_read() {
+    highscore_offset = 1;
     char entry[HIGHSCORE_LENGTH + 2];
     entry[HIGHSCORE_LENGTH + 1] = 0; // NUL char
     i2c_start();
@@ -23,7 +26,7 @@ void highscore_read() {
     }
 
     i2c_ack();
-    entry[i] = i2c_recv();
+        entry[i] = i2c_recv();
     }
     i2c_stop();
 

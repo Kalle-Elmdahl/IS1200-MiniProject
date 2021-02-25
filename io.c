@@ -3,7 +3,7 @@
 #include "mipslab.h"
 
 int check_for_start();
-int check_menu_buttons();
+void check_menu_buttons();
 void check_game_buttons();
 void check_sub_menu_buttons();
 int last_btns = 0, btns = 0, sws = 0, clicks = 0, updated = 0;
