@@ -3,7 +3,7 @@
 #include "mipslab.h"
 
 void get_menu_text();
-const struct menu_item menu_items[4];
+const struct menu_item menu_items[number_of_menu_items];
 int current_menu_position = 0;
 
  
@@ -46,7 +46,7 @@ void select_current_menu_item() {
 // int text_width;
 // int sub_menu;
 // int action;
-const struct menu_item menu_items[4] = {
+const struct menu_item menu_items[number_of_menu_items] = {
     {
         "Restart game",
         52,
@@ -69,6 +69,12 @@ const struct menu_item menu_items[4] = {
         "Credits",
         31,
         -1,
+        -1
+    },
+    {
+        "Highscore",
+        41,
+        2,
         -1
     },
 };

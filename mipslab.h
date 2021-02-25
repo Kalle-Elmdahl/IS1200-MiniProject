@@ -110,10 +110,10 @@ struct menu_item {
     int action;
 };
 extern int current_menu_position;
-#define number_of_menu_items 4
+#define number_of_menu_items 5
 
 /* submenu.c */
-enum sub_menus {GAME_MODE, SPEED} current_sub_menu;
+enum sub_menus {GAME_MODE, SPEED, HIGHSCORE} current_sub_menu;
 enum sub_menus current_sub_menu;
 
 void init_sub_menu( void );
