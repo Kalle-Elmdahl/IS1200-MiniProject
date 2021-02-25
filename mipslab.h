@@ -31,6 +31,9 @@ enum game_states game_state;
 enum game_modes {ONE_PLAYER, TWO_PLAYER, AI} game_mode;
 enum game_modes game_mode;
 
+enum sub_menus {GAME_MODE, SPEED} current_sub_menu;
+enum sub_menus current_sub_menu;
+
 /* Global variables */
 uint8_t player_1x [120]; // Initalize array outside of struct because reasons
 uint8_t player_1y [120]; // Initalize array outside of struct because reasons
@@ -113,9 +116,12 @@ extern int current_menu_position;
 #define number_of_menu_items 5
 
 /* submenu.c */
+<<<<<<< Updated upstream
 enum sub_menus {GAME_MODE, SPEED, HIGHSCORE} current_sub_menu;
 enum sub_menus current_sub_menu;
 
+=======
+>>>>>>> Stashed changes
 void init_sub_menu( void );
 void draw_sub_menu( void );
 void update_sub_menu(int btns);
