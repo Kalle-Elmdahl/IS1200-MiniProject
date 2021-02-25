@@ -31,6 +31,9 @@ enum game_states game_state;
 enum game_modes {ONE_PLAYER, TWO_PLAYER, AI} game_mode;
 enum game_modes game_mode;
 
+enum sub_menus {GAME_MODE, SPEED} current_sub_menu;
+enum sub_menus current_sub_menu;
+
 /* Global variables */
 uint8_t player_1x [120]; // Initalize array outside of struct because reasons
 uint8_t player_1y [120]; // Initalize array outside of struct because reasons
