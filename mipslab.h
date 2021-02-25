@@ -119,6 +119,7 @@ extern int current_menu_position;
 void init_sub_menu( void );
 void draw_sub_menu( void );
 void update_sub_menu(int btns);
+void draw_highscore();
 
 /* startpage.c */
 void draw_start_page( void );
@@ -148,3 +149,6 @@ const uint8_t const apple_icon[3][3];
 const uint8_t const check_box[5][6];
 const uint8_t const sq_obstacle[5][5];
 const uint8_t const sq_obstacle_animation[5][5];
+
+/* highscore.c */
+void highscore_read();
