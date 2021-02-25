@@ -5,6 +5,7 @@
 uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 int timeoutcount = 0;
 int screen_should_update = 1;
+game_update_time = 5;
 
 
 int main(void) {
@@ -50,7 +51,7 @@ void update() {
             return;
         }
 
-		if (timeoutcount == 5) {
+		if (timeoutcount == game_update_time) {
             clear_pixels();
             game_update();
             update_display();

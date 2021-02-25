@@ -82,8 +82,6 @@ struct Snake update_snake(struct Snake snake, struct Snake other_snake) {
             snake.x[0] = snake.x[0] - SNAKE_WIDTH;
             break;
     }
-
-    if(is_valid_snake(snake, other_snake) == 0) game_over();
     
     return snake;
 }

@@ -31,7 +31,10 @@ enum game_states game_state;
 enum game_modes {ONE_PLAYER, TWO_PLAYER, AI} game_mode;
 enum game_modes game_mode;
 
-enum sub_menus {GAME_MODE, SPEED, HIGHSCORE} current_sub_menu;
+enum game_speeds {FAST, NORMAL, SLOW} game_speed;
+enum game_speeds game_speed;
+
+enum sub_menus {GAME_MODE, SPEED, CREDITS, HIGHSCORE} current_sub_menu;
 enum sub_menus current_sub_menu;
 
 /* Global variables */
@@ -56,7 +59,6 @@ struct Apple apple;
 struct Obstacle obstacle;
 void game_init( void );
 void game_update( void );
-void game_over( void );
 
 /* snake.c */
 #define SNAKE_WIDTH 3 // Defines the width of the snake
@@ -71,7 +73,7 @@ struct Snake {
     int length;
 };
 
-/* AI */
+/* ai.c */
 char get_AI_direction();
 
 struct Snake initialize_snake( uint8_t );
@@ -102,6 +104,7 @@ int check_user_inputs();
 /* main.c */
 extern uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 void update( void );
+int game_update_time;
 
 /* menu.c */
 void draw_menu( void );

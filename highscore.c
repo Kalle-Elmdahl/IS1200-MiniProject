@@ -4,7 +4,6 @@
 #include "i2c-defs.h" /* Declarations of I2C-specific addresses */
 
 void highscore_read() {
-    highscore_offset = 1;
     char entry[HIGHSCORE_LENGTH + 2];
     entry[HIGHSCORE_LENGTH + 1] = 0; // NUL char
     i2c_start();

@@ -7,9 +7,12 @@ struct Snake player2;
 struct Apple apple;
 struct Obstacle obstacle;
 
+int losing_player;
+
 void calculate_next_frame( void );
 void draw_game( void );
 void display_game_over( void );
+void game_over( int player );
 
 void game_init() {
     player1 = initialize_snake(0);
@@ -46,6 +49,12 @@ void calculate_next_frame() {
         if(is_eating(player2))
             player2.should_grow = 1;
     }
+    int player_one_is_valid = is_valid_snake(player1, player2);
+    int player_two_is_valid = is_valid_snake(player2, player1);
+
+    if(!player_one_is_valid && !player_two_is_valid) game_over(0);
+    if(!player_one_is_valid) game_over(1);
+    if(!player_two_is_valid) game_over(2);
 }
 
 void draw_game() {
@@ -71,11 +80,19 @@ void draw_game() {
 
 }
 
-void game_over() {
+void game_over(int player) {
     game_state = GAME_OVER;
+    losing_player = player;
 }
 
 void display_game_over() {
     draw_text(0, 0, "Game Over!");
-    draw_text(0, 1, "Flip switch to reset.");
+    if(losing_player == 0) {
+        draw_text(0, 1, "Draw");
+    } else if(losing_player == 1) {
+        draw_text(0, 1, "Player 2 won");
+    } else if(losing_player == 2) {
+        draw_text(0, 1, "Player 1 won");
+    }
+    draw_text(0, 2, "Flip switch to reset.");
 }

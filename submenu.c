@@ -8,6 +8,8 @@ void draw_game_mode();
 void draw_speed();
 void update_game_mode(int btns);
 void update_speed(int btns);
+void draw_credits();
+void draw_highscore();
 int current_list_item = 0;
 
 void init_sub_menu() {
@@ -21,6 +23,9 @@ void draw_sub_menu() {
             break;
         case SPEED:
             draw_speed();
+            break;
+        case CREDITS:
+            draw_credits();
             break;
         case HIGHSCORE:
             draw_highscore();
@@ -74,10 +79,33 @@ void draw_speed() {
     draw_text(LIST_LEFT_PADDING, 0, "Fast");
     draw_text(LIST_LEFT_PADDING, 1, "Normal");
     draw_text(LIST_LEFT_PADDING, 2, "Slow");
+    draw_image(50, 2 + current_list_item * 8, 3, 5, &arrow_left[0][0]);
+    draw_image(5, 2 + game_speed * 8, 6, 5, &check_box[0][0]);
 }
 
 void update_speed(int btns) {
+    if(btns & 0x8 && current_list_item != 0) current_list_item--;
+    if(btns & 0x4 && current_list_item != 2) current_list_item++;
+    if(btns & 0x2) {
+        game_speed = current_list_item;
+        game_state = GAME_OVER;
+        switch(game_speed) {
+            case FAST:
+                game_update_time = 2;
+                break;
+            case NORMAL:
+                game_update_time = 5;
+                break;
+            case SLOW:
+                game_update_time = 10;
+                break;
+        }
+    }
+}
 
+void draw_credits() {
+    draw_text(3, 0, "Game made by");
+    draw_text(3, 1, "Erik and Kalle");
 }
 
 void draw_highscore() {

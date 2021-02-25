@@ -39,6 +39,14 @@ void select_current_menu_item() {
         current_sub_menu = menu_items[current_menu_position].sub_menu;
         app_state = SUB_MENU;
         init_sub_menu();
+        return;
+    }
+
+    // No sub-menu
+    switch(menu_items[current_menu_position].action) {
+        case 0:
+            game_over(); // Restart game
+            break;
     }
 }
 
@@ -51,7 +59,7 @@ const struct menu_item menu_items[number_of_menu_items] = {
         "Restart game",
         52,
         -1,
-        -1
+        0
     },
     {
         "Game mode",
@@ -68,13 +76,13 @@ const struct menu_item menu_items[number_of_menu_items] = {
     {
         "Credits",
         31,
-        -1,
+        2,
         -1
     },
     {
         "Highscore",
         41,
-        2,
+        3,
         -1
     },
 };
