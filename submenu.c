@@ -23,7 +23,6 @@ void draw_sub_menu() {
             draw_speed();
             break;
         case HIGHSCORE:
-            draw_highscore();
             break;
         default:
             return;
@@ -78,8 +77,4 @@ void draw_speed() {
 
 void update_speed(int btns) {
 
-}
-
-void draw_highscore() {
-    // MAgic code here
 }

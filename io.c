@@ -2,13 +2,13 @@
 #include <pic32mx.h>
 #include "mipslab.h"
 
-void check_for_start();
+int check_for_start();
+int check_menu_buttons();
 void check_game_buttons();
-void check_menu_buttons();
 void check_sub_menu_buttons();
-int last_btns = 0, btns = 0, sws = 0, clicks = 0;
+int last_btns = 0, btns = 0, sws = 0, clicks = 0, updated = 0;
 
-void check_user_inputs() {
+int check_user_inputs() {
     sws = (PORTD >> 8) & 0xF; // Switch infromation from port D
     btns = (PORTD >> 4) & 0xE | (PORTF >> 1) & 0x1; // Button infromation from port D (btn 2-4) and F (btn 1)
     // player2
@@ -18,8 +18,7 @@ void check_user_inputs() {
 
     switch(app_state) {
         case START_PAGE:
-            check_for_start();
-            return;
+            return check_for_start();
         case MENU:
             check_menu_buttons();
             break;
@@ -31,13 +30,17 @@ void check_user_inputs() {
             break;
     }
 
+    if(app_state != GAME && clicks) updated = 1;
+
     if(sws & 0b1) {
-        if(app_state == MENU && game_state == GAME_OVER) game_init(); // Conditions for starting the game
+        if(app_state != GAME && game_state == GAME_OVER) game_init(); // Conditions for starting the game
         app_state = GAME;
     } else if(!(sws & 0b1) && app_state == GAME) {
         app_state = MENU;
+        updated = 1;
     }
     last_btns = btns;
+    return updated;
 }
 
 
@@ -108,11 +111,12 @@ void check_sub_menu_buttons() {
 
 
 
-void check_for_start() {
+int check_for_start() {
     // The applications should start if all switches are down and any button is pressed
-    if(!sws && btns > 0) {
-        app_state = MENU;
-        game_state = GAME_OVER;
-        game_mode = ONE_PLAYER; // Set game mode to 1 player default
-    }
+    if(sws || btns == 0) return 0;
+    
+    app_state = MENU;
+    game_state = GAME_OVER;
+    game_mode = ONE_PLAYER; // Set game mode to 1 player default
+    return 1;
 }

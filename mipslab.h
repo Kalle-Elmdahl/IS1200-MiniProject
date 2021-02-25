@@ -31,7 +31,7 @@ enum game_states game_state;
 enum game_modes {ONE_PLAYER, TWO_PLAYER, AI} game_mode;
 enum game_modes game_mode;
 
-enum sub_menus {GAME_MODE, SPEED} current_sub_menu;
+enum sub_menus {GAME_MODE, SPEED, HIGHSCORE} current_sub_menu;
 enum sub_menus current_sub_menu;
 
 /* Global variables */
@@ -97,7 +97,7 @@ struct Obstacle {
 };
 
 /* io.c */
-void check_buttons();
+int check_user_inputs();
 
 /* main.c */
 extern uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
@@ -116,9 +116,6 @@ extern int current_menu_position;
 #define number_of_menu_items 5
 
 /* submenu.c */
-enum sub_menus {GAME_MODE, SPEED, HIGHSCORE} current_sub_menu;
-enum sub_menus current_sub_menu;
-
 void init_sub_menu( void );
 void draw_sub_menu( void );
 void update_sub_menu(int btns);

@@ -4,12 +4,14 @@
 
 uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 int timeoutcount = 0;
+int screen_should_update = 1;
 
 
 int main(void) {
     setup_ports();
     setup_display();
     clear_pixels();
+    draw_start_page();
     update_display();
     app_state = START_PAGE;
 
@@ -22,15 +24,14 @@ int main(void) {
 void update() {	
     // Clock is updated every 1/10 second
     if (IFS(0) & 0x100) {
-
-		timeoutcount++;
 		IFSCLR(0) = 0x100;
-        check_user_inputs();
         (*E)++;
 
-		if (timeoutcount == 5) {
-            // update game every second
-            
+        screen_should_update = check_user_inputs(); // returns 1 if i.e. button is clicked
+
+        if(app_state == GAME) {
+		    timeoutcount++;
+        } else if(screen_should_update) {
             clear_pixels();
             switch(app_state) {
                 case START_PAGE:
@@ -43,9 +44,15 @@ void update() {
                     draw_sub_menu();
                     break;
                 case GAME:
-                    game_update();
                     break;
             }
+            update_display();
+            return;
+        }
+
+		if (timeoutcount == 5) {
+            clear_pixels();
+            game_update();
             update_display();
             timeoutcount = 0;
 		}
