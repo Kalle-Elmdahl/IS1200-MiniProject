@@ -33,9 +33,13 @@ int check_user_inputs() {
     if(app_state != GAME && clicks) updated = 1;
 
     if(sws & 0b1) {
-        if(app_state != GAME && game_state == GAME_OVER) game_init(); // Conditions for starting the game
+        if(app_state != GAME && game_state != IN_GAME) game_init(); // Conditions for starting the game
         app_state = GAME;
     } else if(!(sws & 0b1) && app_state == GAME) {
+        if (game_state == WRITING_HIGHSCORE) {
+            // Save highscore
+            save_highscore(initials, player1.length);
+        }
         app_state = MENU;
         updated = 1;
     }
@@ -133,6 +137,10 @@ int check_for_start() {
     game_state = GAME_OVER;
     game_mode = ONE_PLAYER; // Set game mode to 1 player default
     game_speed = NORMAL;
+    
+    short address = 0x1000;
+    int data = 1234567123;
+    write_int(address, data);
 
     /*memory_write_data[0] = 'D';
     memory_write_data[1] = 'C';

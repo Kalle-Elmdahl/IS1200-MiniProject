@@ -118,17 +118,40 @@ void draw_highscore() {
     data[4] = 0; */
     
 
-    memory_write_data[0] = 'A';
+    /*memory_write_data[0] = 'A';
     memory_write_data[1] = 'B';
     memory_write_data[2] = 'C';
-    memory_write_data[3] = 'D';
+    memory_write_data[3] = '1';
+    memory_write_data[4] = '2';
+    memory_write_data[5] = '3';
+    memory_write_data[6] = '4';
+    memory_write_data[7] = '5';
+
 
     memory_address = 0x0001000;
-
-
     write_to_memory();
+    */
+    short address = 0x1000;
+    int data = 1234567123;
+    write_int(address, data);
+    int memory = read_int(address);
+    char *memory_char_thing = &memory;
+    *memory_char_thing += 33;
+    draw_text(0, 0, memory_char_thing);
 
+    int i;
+    for (i = 0; i < 3; i ++) {
+        char name[3] = {highscores[i].first_name, highscores[i].last_name, 0};
+        char score[4];
+        int j = 0;
+        if(highscores[i].score > 99) score[j++] = highscores[i].score / 100 + 48;
+        if(highscores[i].score > 9) score[j++] = (highscores[i].score / 10) % 10 + 48;
+        score[j++] = highscores[i].score % 10 + 48;
+        score[j++] = 0;
+        draw_text(0,i,name);
+        draw_text(50,i,score);
+     }
     
 
-    highscore_read();
+    // highscore_read();
 }

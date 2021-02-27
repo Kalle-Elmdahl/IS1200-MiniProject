@@ -160,8 +160,20 @@ const uint8_t const sq_obstacle[5][5];
 const uint8_t const sq_obstacle_animation[5][5];
 
 /* highscore.c */
+
+
+
+struct highscore {
+    int score;
+    char first_name;
+    char last_name;
+};
+
+struct highscore highscores[3]; 
+
 void highscore_read();
 void write_to_memory();
 void memory_write(char *data, short address);
 char memory_read(short address, int len);
 void write_int(short address, int data);
+int read_int(short address);
