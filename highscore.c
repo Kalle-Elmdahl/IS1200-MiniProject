@@ -30,14 +30,8 @@ void write_to_memory() {
 }
 */
 
-void write_to_memory() {
+void write_to_memory(char *data) {
     short address = 0x0001000;
-    char data[5];
-    data[0] = 'A';
-    data[1] = 'B';
-    data[2] = 'C';
-    data[3] = 'D';
-    data[4] = 0;
     int len = 4;
     do {
         i2c_start();
@@ -144,7 +138,7 @@ void highscore_read() {
     // draw_text(10,1,name);
 }
 
-void memory_write(char ch, short address, int len) {
+void memory_write(char *data, short address) {
 
     do {
         i2c_start();
@@ -155,12 +149,10 @@ void memory_write(char ch, short address, int len) {
 
     int i = 0;
 
-    while (i < len) {
-        i2c_ack();
+    while (i < 8) {
+        i2c_send(data[i++]);
         i++;
     }
-
-    i2c_send(ch);
     i2c_stop();
 }
 
