@@ -89,17 +89,18 @@ void game_over(int player) {
 }
 
 void display_game_over() {
+    char hundred, tenth, oneth;
     draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);
     draw_image(MAX_X - 17, 1, 9, 16, &lever_down[0][0]);
     draw_text(MAX_X - 20, 3, "Reset");
     draw_text(0, 0, "Game Over!");
     switch(game_mode) {
         case ONE_PLAYER:
-            int hundred = player1.length / 100;
-            int tenth = (player1.length / 10) % 10;
-            int oneth = player1.length % 10;
+            hundred = player1.length / 100;
+            tenth = (player1.length / 10) % 10;
+            oneth = player1.length % 10 + 48;
             draw_text(0, 1, "Your final score was: ");
-            draw_text(0, 2, (char)(oneth + 48));
+            draw_text(0, 2, &oneth);
             // Bottom bar
             draw_rect(0, DISPLAY_HEIGHT - 8, DISPLAY_WIDTH - SIDEBAR_WIDTH, 8);
             draw_text(3, 3, "Save highscore");
