@@ -26,7 +26,7 @@
 enum app_states {START_PAGE, MENU, SUB_MENU, GAME} app_state;
 enum app_states app_state;
 
-enum game_states {IN_GAME, GAME_OVER} game_state;
+enum game_states {IN_GAME, GAME_OVER, WRITING_HIGHSCORE} game_state;
 enum game_states game_state;
 
 enum game_modes {ONE_PLAYER, TWO_PLAYER, AI} game_mode;
