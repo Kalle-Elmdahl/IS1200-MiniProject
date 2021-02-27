@@ -43,6 +43,8 @@ uint8_t player_1x [120]; // Initalize array outside of struct because reasons
 uint8_t player_1y [120]; // Initalize array outside of struct because reasons
 uint8_t player_2x [120]; // Initalize array outside of struct because reasons
 uint8_t player_2y [120]; // Initalize array outside of struct because reasons
+char memory_write_data[8];
+short memory_address;
 
 /* setup.c */
 void setup_ports( void );
@@ -159,6 +161,7 @@ const uint8_t const sq_obstacle_animation[5][5];
 
 /* highscore.c */
 void highscore_read();
-void write_to_memory(char *data);
+void write_to_memory();
 void memory_write(char *data, short address);
 char memory_read(short address, int len);
+void write_int(short address, int data);

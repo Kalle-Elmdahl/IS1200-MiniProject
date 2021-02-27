@@ -134,14 +134,12 @@ int check_for_start() {
     game_mode = ONE_PLAYER; // Set game mode to 1 player default
     game_speed = NORMAL;
 
-    char data[5];
-    data[0] = 'A';
-    data[1] = 'B';
-    data[2] = 'C';
-    data[3] = 'D';
-    data[4] = 0;
+    /*memory_write_data[0] = 'D';
+    memory_write_data[1] = 'C';
+    memory_write_data[2] = 'B';
+    memory_write_data[3] = 'A';
 
-    write_to_memory(data);
+    write_to_memory(0x0001000);*/
 
     /*
     int i;

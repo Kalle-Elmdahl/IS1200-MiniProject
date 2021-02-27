@@ -110,13 +110,25 @@ void draw_credits() {
 
 void draw_highscore() {
 
-    char data[5];
-    data[0] = 'A';
-    data[1] = 'B';
-    data[2] = 'C';
-    data[3] = 'D';
-    data[4] = 0;
+/*     char data[5];
+    data[0] = 'D';
+    data[1] = 'C';
+    data[2] = 'B';
+    data[3] = 'A';
+    data[4] = 0; */
+    
 
-    write_to_memory(data);
+    memory_write_data[0] = 'A';
+    memory_write_data[1] = 'B';
+    memory_write_data[2] = 'C';
+    memory_write_data[3] = 'D';
+
+    memory_address = 0x0001000;
+
+
+    write_to_memory();
+
+    
+
     highscore_read();
 }

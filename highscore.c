@@ -30,16 +30,18 @@ void write_to_memory() {
 }
 */
 
-void write_to_memory(char *data) {
+void write_to_memory() {
+
+    // char *ok = memory_write_data;
 
     char ok[5];
-    ok[0] = 'A';
-    ok[1] = 'B';
-    ok[2] = 'C';
-    ok[3] = 'D';
+    ok[0] = memory_write_data[0];
+    ok[1] = memory_write_data[1];
+    ok[2] = memory_write_data[2];
+    ok[3] = memory_write_data[3];
     ok[4] = 0;
 
-    short address = 0x0001000;
+    short address = memory_address;
     int len = 4;
     do {
         i2c_start();
