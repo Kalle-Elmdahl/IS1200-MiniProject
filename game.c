@@ -108,13 +108,14 @@ void game_over(int player) {
 }
 
 void display_game_over() {
+    int text_x;
     draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);
     draw_image(MAX_X - 17, 1, 9, 16, &lever_down[0][0]);
     draw_text(MAX_X - 22, 3, "Reset");
     draw_text((MAX_X - SIDEBAR_WIDTH) / 2 - 16, 0, "Game Over!");
     switch(game_mode) {
         case ONE_PLAYER:
-            int text_x = SCREEN_CENTER - 13 - score_text_width / 2;
+            text_x = SCREEN_CENTER - 13 - score_text_width / 2;
             draw_text(text_x, 1, "Score");
             draw_text(text_x + 26, 1, score);
             // Bottom bar
