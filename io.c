@@ -45,50 +45,62 @@ int check_user_inputs() {
 
 
 void check_game_buttons() {
-    if(game_state == GAME_OVER && game_mode == ONE_PLAYER) {
-        if(clicks & 0x8) game_state = WRITING_HIGHSCORE;
+    switch(game_state) {
+        case IN_GAME:
+            /* Player 1 buttons */
+            // Button 1 -> right
+            if (btns & 0x1 && player1.direction != 'l')
+                player1.next_direction = 'r';
+
+            // Button 2 -> down
+            if (btns & 0x2 && player1.direction != 'u')
+                player1.next_direction = 'd';
+
+            // Button 3 -> up
+            if (btns & 0x4 && player1.direction != 'd')
+                player1.next_direction = 'u';
+
+            // Button 4 -> left
+            if ((btns & 0x8) && player1.direction != 'r')
+                player1.next_direction = 'l';
+
+            if (game_mode == AI)
+                player2.next_direction = get_AI_direction();
+
+            if (game_mode != TWO_PLAYER) return;
+
+            /* Player 2 buttons */
+            // Button 1 -> right
+            if (btns & 0x10 && player2.direction != 'l')
+                player2.next_direction = 'r';
+
+            // Button 2 -> down
+            if (btns & 0x20 && player2.direction != 'u')
+                player2.next_direction = 'd';
+
+            // Button 3 -> up
+            if (btns & 0x40 && player2.direction != 'd')
+                player2.next_direction = 'u';
+
+            // Button 4 -> left
+            if (btns & 0x80 && player2.direction != 'r')
+                player2.next_direction = 'l';
+            break;
+        case GAME_OVER:
+            if(game_mode == ONE_PLAYER && clicks & 0x8) 
+                game_state = WRITING_HIGHSCORE;
+            break;
+        case WRITING_HIGHSCORE:
+            if(selected_initial != 1 && clicks & 0x1) 
+                initials[selected_initial]++;
+            if(selected_initial != 1 && clicks & 0x2) 
+                initials[selected_initial]--;
+            if(selected_initial != 1 && clicks & 0x4) 
+                selected_initial++;
+            if(selected_initial != 0 && clicks & 0x8) 
+                selected_initial--;
+            break;
     }
-
-    /* Player 1 buttons */
-
-    // Button 1 -> right
-    if (btns & 0x1 && player1.direction != 'l')
-        player1.next_direction = 'r';
-
-    // Button 2 -> down
-    if (btns & 0x2 && player1.direction != 'u')
-        player1.next_direction = 'd';
-
-    // Button 3 -> up
-    if (btns & 0x4 && player1.direction != 'd')
-        player1.next_direction = 'u';
-
-    // Button 4 -> left
-    if ((btns & 0x8) && player1.direction != 'r')
-        player1.next_direction = 'l';
-
-    if (game_mode == AI)
-        player2.next_direction = get_AI_direction();
-
-    if (game_mode != TWO_PLAYER) return;
-
-    /* Player 2 buttons */
-
-    // Button 1 -> right
-    if (btns & 0x10 && player2.direction != 'l')
-        player2.next_direction = 'r';
-
-    // Button 2 -> down
-    if (btns & 0x20 && player2.direction != 'u')
-        player2.next_direction = 'd';
-
-    // Button 3 -> up
-    if (btns & 0x40 && player2.direction != 'd')
-        player2.next_direction = 'u';
-
-    // Button 4 -> left
-    if (btns & 0x80 && player2.direction != 'r')
-        player2.next_direction = 'l';
 
 }
 
