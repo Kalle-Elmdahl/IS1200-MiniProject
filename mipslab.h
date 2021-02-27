@@ -61,6 +61,9 @@ struct Obstacle obstacle;
 void game_init( void );
 void game_update( void );
 
+extern int selected_initial;
+char initials[3];
+
 /* snake.c */
 #define SNAKE_WIDTH 3 // Defines the width of the snake
 #define SNAKE_SIZE 3 // Defines size of snake body-block

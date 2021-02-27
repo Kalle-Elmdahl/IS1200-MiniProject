@@ -10,8 +10,8 @@ struct Obstacle obstacle;
 
 int losing_player;
 char score[4];
-char initials[3];
 int score_text_width;
+selected_initial = 0;
 
 void calculate_next_frame( void );
 void draw_game( void );
@@ -100,15 +100,18 @@ void game_over(int player) {
     score[i++] = player1.length % 10 + 48;
     score[i++] = 0;
     score_text_width = i * 5;
+
+    // Reset highscore write
     initials[0] = 65;
     initials[1] = 65;
+    selected_initial = 0;
 }
 
 void display_game_over() {
     draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);
     draw_image(MAX_X - 17, 1, 9, 16, &lever_down[0][0]);
     draw_text(MAX_X - 22, 3, "Reset");
-    draw_text((MAX_X - SIDEBAR_WIDTH) / 2 - 13, 0, "Game Over!");
+    draw_text((MAX_X - SIDEBAR_WIDTH) / 2 - 16, 0, "Game Over!");
     switch(game_mode) {
         case ONE_PLAYER:
             int text_x = SCREEN_CENTER - 13 - score_text_width / 2;
@@ -140,13 +143,20 @@ void display_game_over() {
 }
 
 void display_write_highscore() {
-    draw_text(SCREEN_CENTER - 25, 0, "Enter your name");
+    draw_text(SCREEN_CENTER - 45, 0, "Enter your name");
 
     draw_text(SCREEN_CENTER - 4, 1, initials)
-    draw_image(3, 16, 5, 3, &arrow_up[0][0]);
+    draw_image(SCREEN_CENTER - 4 + selected_initial * 4, 16, 5, 3, &arrow_up[0][0]);
 
     /* Sidebar */
     draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);
     draw_image(MAX_X - 17, 1, 9, 16, &lever_down[0][0]);
     draw_text(MAX_X - 20, 3, "Save");
+
+    /* Bottom bar */
+    draw_rect(0, DISPLAY_HEIGHT - 8, DISPLAY_WIDTH - SIDEBAR_WIDTH, 8);
+    draw_image(3, DISPLAY_HEIGHT - 6, 3, 5, &arrow_left[0][0]);
+    draw_image(8, DISPLAY_HEIGHT - 6, 3, 5, &arrow_right[0][0]);
+    draw_image(13, DISPLAY_HEIGHT - 6, 5, 3, &arrow_up[0][0]);
+    draw_image(20, DISPLAY_HEIGHT - 6, 5, 3, &arrow_down[0][0]);
 }
