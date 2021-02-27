@@ -112,7 +112,7 @@ void display_game_over() {
     draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);
     draw_image(MAX_X - 17, 1, 9, 16, &lever_down[0][0]);
     draw_text(MAX_X - 22, 3, "Reset");
-    draw_text((MAX_X - SIDEBAR_WIDTH) / 2 - 16, 0, "Game Over!");
+    draw_text((MAX_X - SIDEBAR_WIDTH) / 2 - 22, 0, "Game Over!");
     switch(game_mode) {
         case ONE_PLAYER:
             text_x = SCREEN_CENTER - 13 - score_text_width / 2;
@@ -144,9 +144,9 @@ void display_game_over() {
 }
 
 void display_write_highscore() {
-    draw_text(SCREEN_CENTER - 45, 0, "Enter your name");
+    draw_text(SCREEN_CENTER - 40, 0, "Enter your name");
 
-    draw_text(SCREEN_CENTER - 4, 1, initials)
+    draw_text(SCREEN_CENTER - 4, 1, initials);
     draw_image(SCREEN_CENTER - 4 + selected_initial * 4, 16, 5, 3, &arrow_up[0][0]);
 
     /* Sidebar */
