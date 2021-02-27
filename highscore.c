@@ -155,17 +155,15 @@ void memory_write(char ch, short address, int len) {
 
     int i = 0;
 
-    while (i < len>) {
+    while (i < len) {
         i2c_ack();
         i++;
     }
 
     i2c_send(ch);
-
     i2c_stop();
 }
 
-}
 
 char memory_read(short address, int len) { // send address: (0x1 << 12) 
 

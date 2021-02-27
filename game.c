@@ -94,7 +94,7 @@ void display_game_over() {
     draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);
     draw_image(MAX_X - 17, 1, 9, 16, &lever_down[0][0]);
     draw_text(MAX_X - 20, 3, "Reset");
-    draw_text((MAX_X - SIDEBAR_WIDTH) / 2 - 30, 0, "Game Over!");
+    draw_text((MAX_X - SIDEBAR_WIDTH) / 2 - 20, 0, "Game Over!");
     int i;
     switch(game_mode) {
         case ONE_PLAYER:
