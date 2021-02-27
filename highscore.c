@@ -12,33 +12,27 @@ void highscore_read() {
     char entry[2];
     entry[1] = 0; // NUL char
 
-    /*
+    uint8_t ack = 0;
 
-    for(i = 0; i < HIGHSCORE_ENTRIES; i++) {
-        int s = scores[i];
-        do {
-            i2c_start();
-            ack = i2c_send(EEPROM_WRITE);
-        } while(!ack);
 
-    */
+    do {
+        i2c_start();
+        ack = i2c_send(EEPROM_WRITE);
+    } while(!ack);
 
-    i2c_start();
-    i2c_send(EEPROM_WRITE);
     i2c_send(EEPROM_MEM_ADD >> 2);
-
-    // Write name (letter by letter)
+    i2c_send(EEPROM_MEM_ADD);
     i2c_send(name[0]);
     i2c_stop();
+
     
 
 
     i2c_start();
     i2c_send(EEPROM_WRITE);
     i2c_send(EEPROM_MEM_ADD >> 2);
-    // i2c_send(EEPROM_MEM_ADD);
+    i2c_send(EEPROM_MEM_ADD);
     i2c_restart();
-
     i2c_send(EEPROM_READ);
     entry[0] = (i2c_recv() + 48);
     /*
@@ -56,6 +50,5 @@ void highscore_read() {
     }
     */
     i2c_stop();
-
     draw_text(10,0,entry);
 }

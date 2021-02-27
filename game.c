@@ -113,6 +113,7 @@ void display_game_over() {
             }
             break;
     }
-    if(game_mode != ONE_PLAYER || game_mode == AI) {
+    
+    // if(game_mode != ONE_PLAYER || game_mode == AI) {
     draw_text(0, 2, "Flip switch to reset.");
 }
