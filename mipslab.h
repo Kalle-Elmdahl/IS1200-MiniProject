@@ -17,6 +17,7 @@
 
 /* UI */
 #define SIDEBAR_WIDTH 25
+#define SCREEN_CENTER (MAX_X - SIDEBAR_WIDTH) / 2
 
 /* Text */
 #define CHAR_WIDTH 7
@@ -104,7 +105,7 @@ int check_user_inputs();
 /* main.c */
 extern uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 void update( void );
-int game_update_time;
+extern int game_update_time;
 
 /* menu.c */
 void draw_menu( void );
@@ -155,3 +156,4 @@ const uint8_t const sq_obstacle_animation[5][5];
 
 /* highscore.c */
 void highscore_read();
+void write_to_memory();

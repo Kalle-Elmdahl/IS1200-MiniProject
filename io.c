@@ -110,7 +110,6 @@ void check_sub_menu_buttons() {
 }
 
 
-
 int check_for_start() {
     // The applications should start if all switches are down and any button is pressed
     if(sws || btns == 0) return 0;
@@ -119,5 +118,6 @@ int check_for_start() {
     game_state = GAME_OVER;
     game_mode = ONE_PLAYER; // Set game mode to 1 player default
     game_speed = NORMAL;
+    write_to_memory();
     return 1;
 }

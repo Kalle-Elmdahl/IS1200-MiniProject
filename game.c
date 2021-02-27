@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <pic32mx.h>
+#include <math.h>
 #include "mipslab.h"
 
 struct Snake player1;
@@ -89,19 +90,22 @@ void game_over(int player) {
 }
 
 void display_game_over() {
-    char hundred[2], tenth[2], oneth[2];
+    char score[4];
     draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);
     draw_image(MAX_X - 17, 1, 9, 16, &lever_down[0][0]);
     draw_text(MAX_X - 20, 3, "Reset");
-    draw_text(0, 0, "Game Over!");
+    draw_text((MAX_X - SIDEBAR_WIDTH) / 2 - 30, 0, "Game Over!");
+    int i;
     switch(game_mode) {
         case ONE_PLAYER:
-            hundred[0] = player1.length / 100;
-            tenth[0] = (player1.length / 10) % 10;
-            oneth[0] = player1.length % 10 + 48;
-            oneth[1] = 0;
-            draw_text(0, 1, "Your final score was: ");
-            draw_text(0, 2, oneth);
+            i = 0;
+            if(player1.length > 99) score[i++] = player1.length / 100 + 48;
+            if(player1.length > 9) score[i++] = (player1.length / 10) % 10 + 48;
+            score[i++] = player1.length % 10 + 48;
+            score[i++] = 0;
+            int text_x = SCREEN_CENTER - 13 - i * 2;
+            draw_text(text_x, 1, "Score");
+            draw_text(text_x + 26, 1, score);
             // Bottom bar
             draw_rect(0, DISPLAY_HEIGHT - 8, DISPLAY_WIDTH - SIDEBAR_WIDTH, 8);
             draw_text(3, 3, "Save highscore");

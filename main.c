@@ -6,7 +6,7 @@
 uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 int timeoutcount = 0;
 int screen_should_update = 1;
-game_update_time = 5;
+int game_update_time = 5;
 
 
 int main(void) {
@@ -15,7 +15,6 @@ int main(void) {
     clear_pixels();
     draw_start_page();
     update_display();
-    write_to_memory();
     app_state = START_PAGE;
 
     setup_leds();
@@ -24,24 +23,7 @@ int main(void) {
 	return 0;
 }
 
-void write_to_memory() {
-    char name[2];
-    name[0] = 'B';
-    name[1] = 0; // null char
-    uint8_t ack = 0;
 
-    do {
-        i2c_start();
-        ack = i2c_send(EEPROM_WRITE);
-    } while(!ack);
-
-    // i2c_start();
-    // i2c_send(EEPROM_WRITE);
-    i2c_send(EEPROM_MEM_ADD >> 2);
-    i2c_send(EEPROM_MEM_ADD);
-    i2c_send(name[0]);
-    i2c_stop();
-}
 
 void update() {	
     // Clock is updated every 1/10 second

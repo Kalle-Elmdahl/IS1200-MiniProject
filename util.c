@@ -56,10 +56,14 @@ void draw_text(int x, int y, char *s) {
 	int i, charx = 0, zeros_in_a_row = 0;
 
     while(*s) {
-        while (charx < CHAR_WIDTH) {
-            if(!font[*s][charx]) zeros_in_a_row++;
-            if(x == DISPLAY_WIDTH || zeros_in_a_row == 2) break;
-            text[y][x++] = font[*s][charx++];
+        if(*s == 32) {
+            x += 4;
+        } else {
+            while (charx < CHAR_WIDTH) {
+                if(!font[*s][charx]) zeros_in_a_row++;
+                if(x == DISPLAY_WIDTH || zeros_in_a_row == 2) break;
+                text[y][x++] = font[*s][charx++];
+            }
         }
         s++;
         zeros_in_a_row = charx = 0;

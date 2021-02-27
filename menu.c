@@ -57,13 +57,13 @@ void select_current_menu_item() {
 const struct menu_item menu_items[number_of_menu_items] = {
     {
         "Restart game",
-        52,
+        56,
         -1,
         0
     },
     {
         "Game mode",
-        40,
+        44,
         0,
         -1
     },

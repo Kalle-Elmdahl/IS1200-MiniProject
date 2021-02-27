@@ -3,7 +3,66 @@
 #include "mipslab.h"  /* Declatations for game */
 #include "i2c-defs.h" /* Declarations of I2C-specific addresses */
 
+
+/*
+void write_to_memory() {
+    uint8_t name[8];
+    int i;
+    for (i = 0; i < 8; i++) {
+        name[i] = 65 + i;
+    }
+    uint8_t ack = 0;
+
+    do {
+        i2c_start();
+        ack = i2c_send(EEPROM_WRITE);
+    } while(!ack);
+
+
+    // i2c_start();
+    // i2c_send(EEPROM_WRITE);
+    i2c_send(EEPROM_MEM_ADD >> 2);
+    i2c_send(EEPROM_MEM_ADD);
+    i2c_send(EEPROM_WRITE);
+    for (i = 0; i < 8; i ++)
+        i2c_send(name[i]);
+    i2c_stop();
+}
+*/
+
+void write_to_memory() {
+    short address = 0x0001000;
+    char data[5];
+    data[0] = 'A';
+    data[1] = 'B';
+    data[2] = 'C';
+    data[3] = 'D';
+    data[4] = 0;
+    int len = 4;
+    do {
+        i2c_start();
+    } while (!i2c_send(EEPROM_WRITE));
+
+    i2c_send(address >> 8);
+    i2c_send(address);
+
+    int i = 0;
+
+    while (len >= 0) {
+        i2c_send(data[i++]);
+        len--;
+    }
+
+    i2c_stop();
+}
+
+
+
 void highscore_read() {
+
+
+
+    /*
 
     // char name[2];
     // name[0] = 'B';
@@ -25,7 +84,7 @@ void highscore_read() {
     i2c_send(EEPROM_MEM_ADD);
     i2c_send(name[0]);
     i2c_stop();
-    */
+    
     
 
 
@@ -55,7 +114,84 @@ void highscore_read() {
         entry[i] = i2c_recv();
     }
     */
+
+    char entry[5];
+    short address = 0x0001000;
+    int len = 4;
+
+    do {
+        i2c_start();
+    } while (!i2c_send(EEPROM_WRITE));
+
+    i2c_send(address >> 8);
+    i2c_send(address);
+
+    i2c_start();
+    i2c_send(EEPROM_READ);
+
+    int i = 0;
+
+    while (len >= 0) {
+        entry[i++] = i2c_recv() + 33;
+        i2c_ack();
+        len--;
+    }
+
+    i2c_nack();
+    
     i2c_stop();
     draw_text(10,0,entry);
     // draw_text(10,1,name);
 }
+
+void memory_write(char ch, short address, int len) {
+
+    do {
+        i2c_start();
+    } while (!i2c_send(EEPROM_WRITE));
+
+    i2c_send(address >> 8);
+    i2c_send(address);
+
+    int i = 0;
+
+    while (i < len>) {
+        i2c_ack();
+        i++;
+    }
+
+    i2c_send(ch);
+
+    i2c_stop();
+}
+
+}
+
+char memory_read(short address, int len) { // send address: (0x1 << 12) 
+
+    char char_at_memory;
+
+    do {
+        i2c_start();
+    } while (!i2c_send(EEPROM_WRITE));
+
+    i2c_send(address >> 8);
+    i2c_send(address);
+
+    i2c_start();
+    i2c_send(EEPROM_READ);
+
+    int i = 0;
+
+    while (i < len) {
+        i2c_ack();
+        len++;
+    }
+
+    char_at_memory = i2c_recv() + 33;
+
+    i2c_nack();
+    i2c_stop();
+
+    return char_at_memory;
+} 
