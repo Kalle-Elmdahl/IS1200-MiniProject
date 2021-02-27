@@ -52,7 +52,7 @@ void calculate_next_frame() {
 
         player_two_is_valid = is_valid_snake(player2, player1);
     }
-    
+
     player_one_is_valid = is_valid_snake(player1, player2);
 
     if(!player_one_is_valid && !player_two_is_valid) game_over(0);
@@ -90,12 +90,29 @@ void game_over(int player) {
 
 void display_game_over() {
     draw_text(0, 0, "Game Over!");
-    if(losing_player == 0) {
-        draw_text(0, 1, "Draw");
-    } else if(losing_player == 1) {
-        draw_text(0, 1, "Player 2 won");
-    } else if(losing_player == 2) {
-        draw_text(0, 1, "Player 1 won");
+    switch(game_mode) {
+        case ONE_PLAYER:
+            draw_text(0, 1, "Your final score was: ");
+            break;
+        case TWO_PLAYER:
+            if(losing_player == 0) {
+                draw_text(0, 1, "Draw");
+            } else if(losing_player == 1) {
+                draw_text(0, 1, "Player 2 won");
+            } else if(losing_player == 2) {
+                draw_text(0, 1, "Player 1 won");
+            }
+            break;
+        case AI:
+            if(losing_player == 0) {
+                draw_text(0, 1, "Draw");
+            } else if(losing_player == 1) {
+                draw_text(0, 1, "AI won");
+            } else if(losing_player == 2) {
+                draw_text(0, 1, "You won");
+            }
+            break;
     }
+    if(game_mode != ONE_PLAYER || game_mode == AI) {
     draw_text(0, 2, "Flip switch to reset.");
 }
