@@ -56,8 +56,8 @@ void calculate_next_frame() {
     player_one_is_valid = is_valid_snake(player1, player2);
 
     if(!player_one_is_valid && !player_two_is_valid) game_over(0);
-    if(!player_one_is_valid) game_over(1);
-    if(!player_two_is_valid) game_over(2);
+    else if(!player_one_is_valid) game_over(1);
+    else if(!player_two_is_valid) game_over(2);
 }
 
 void draw_game() {
@@ -113,7 +113,5 @@ void display_game_over() {
             }
             break;
     }
-    
-    // if(game_mode != ONE_PLAYER || game_mode == AI) {
     draw_text(0, 2, "Flip switch to reset.");
 }
