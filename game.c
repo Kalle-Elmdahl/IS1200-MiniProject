@@ -40,6 +40,7 @@ void game_update() {
 
 void calculate_next_frame() {
     player1 = update_snake(player1, player2);
+    int player_one_is_valid, player_two_is_valid;
     
     if(is_eating(player1))
         player1.should_grow = 1;
@@ -48,9 +49,11 @@ void calculate_next_frame() {
         player2 = update_snake(player2, player1);
         if(is_eating(player2))
             player2.should_grow = 1;
+
+        player_two_is_valid = is_valid_snake(player2, player1);
     }
-    int player_one_is_valid = is_valid_snake(player1, player2);
-    int player_two_is_valid = is_valid_snake(player2, player1);
+    
+    player_one_is_valid = is_valid_snake(player1, player2);
 
     if(!player_one_is_valid && !player_two_is_valid) game_over(0);
     if(!player_one_is_valid) game_over(1);
