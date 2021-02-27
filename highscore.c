@@ -5,13 +5,13 @@
 
 void highscore_read() {
 
-    char name[2];
-    name[0] = 'B';
-    name[1] = 0; // null char
+    // char name[2];
+    // name[0] = 'B';
+    // name[1] = 0; // null char
     char entry[HIGHSCORE_LENGTH + 2];
     entry[HIGHSCORE_LENGTH + 1] = 0; // NUL char
 
-    uint8_t ack = 0;
+    /*uint8_t ack = 0;
 
 
     do {
@@ -23,9 +23,9 @@ void highscore_read() {
     // i2c_send(EEPROM_WRITE);
     i2c_send(EEPROM_MEM_ADD >> 2);
     i2c_send(EEPROM_MEM_ADD);
-    i2c_send(66);
+    i2c_send(name[0]);
     i2c_stop();
-
+    */
     
 
 
@@ -57,4 +57,5 @@ void highscore_read() {
     */
     i2c_stop();
     draw_text(10,0,entry);
+    // draw_text(10,1,name);
 }
