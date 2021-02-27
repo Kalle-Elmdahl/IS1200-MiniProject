@@ -13,6 +13,7 @@ int losing_player;
 void calculate_next_frame( void );
 void draw_game( void );
 void display_game_over( void );
+void display_write_highscore( void );
 void game_over( int player );
 
 void game_init() {
@@ -35,6 +36,9 @@ void game_update() {
             break;
         case GAME_OVER:
             display_game_over();
+            break;
+        case WRITING_HIGHSCORE:
+            display_write_highscore();
             break;
     }     
 }
@@ -93,8 +97,8 @@ void display_game_over() {
     char score[4];
     draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);
     draw_image(MAX_X - 17, 1, 9, 16, &lever_down[0][0]);
-    draw_text(MAX_X - 20, 3, "Reset");
-    draw_text((MAX_X - SIDEBAR_WIDTH) / 2 - 20, 0, "Game Over!");
+    draw_text(MAX_X - 22, 3, "Reset");
+    draw_text((MAX_X - SIDEBAR_WIDTH) / 2 - 16, 0, "Game Over!");
     int i;
     switch(game_mode) {
         case ONE_PLAYER:
@@ -129,4 +133,8 @@ void display_game_over() {
             }
             break;
     }
+}
+
+void display_write_highscore() {
+    draw_text(0, 0, "Hello there");
 }

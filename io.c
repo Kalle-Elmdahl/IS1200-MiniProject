@@ -45,6 +45,9 @@ int check_user_inputs() {
 
 
 void check_game_buttons() {
+    if(game_state == GAME_OVER && game_mode == ONE_PLAYER) {
+        if(clicks & 0x8) game_state = WRITING_HIGHSCORE;
+    }
 
     /* Player 1 buttons */
 
