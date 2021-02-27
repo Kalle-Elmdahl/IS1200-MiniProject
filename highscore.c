@@ -126,7 +126,7 @@ void highscore_read() {
     int i = 0;
 
     while (len >= 0) {
-        entry[i++] = i2c_recv() + 33;
+        entry[i++] = i2c_recv();
         i2c_ack();
         len--;
     }
