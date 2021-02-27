@@ -109,5 +109,14 @@ void draw_credits() {
 }
 
 void draw_highscore() {
+
+    char data[5];
+    data[0] = 'A';
+    data[1] = 'B';
+    data[2] = 'C';
+    data[3] = 'D';
+    data[4] = 0;
+
+    write_to_memory(data);
     highscore_read();
 }
