@@ -121,20 +121,32 @@ int check_for_start() {
     game_state = GAME_OVER;
     game_mode = ONE_PLAYER; // Set game mode to 1 player default
     game_speed = NORMAL;
-    // write_to_memory();
-
-    int i;
 
     char data[5];
+    data[0] = 'A';
+    data[1] = 'B';
+    data[2] = 'C';
+    data[3] = 'D';
+    data[4] = 0;
+
+    write_to_memory(data);
+
+    /*
+    int i;
+
+    char data[9];
     data[0] = 'E';
     data[1] = 'F';
     data[2] = 'G';
     data[3] = 'H';
-    data[4] = 0;
+    data[4] = 'I';
+    data[5] = 'J';
+    data[6] = 'K';
+    data[7] = 'L';
+    data[8] = 0;
 
-    for (i = 0; i < 4; i ++) {
-        memory_write(data[i],(0x1 << 12),i);
-    }
+    memory_write(data,0x1000);
+    */
 
 
     return 1;

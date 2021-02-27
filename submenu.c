@@ -109,6 +109,5 @@ void draw_credits() {
 }
 
 void draw_highscore() {
-    write_to_memory();
     highscore_read();
 }

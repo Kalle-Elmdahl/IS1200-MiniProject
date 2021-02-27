@@ -156,6 +156,6 @@ const uint8_t const sq_obstacle_animation[5][5];
 
 /* highscore.c */
 void highscore_read();
-void write_to_memory();
-void memory_write(char ch, short address, int len);
+void write_to_memory(char *data);
+void memory_write(char *data, short address);
 char memory_read(short address, int len);
