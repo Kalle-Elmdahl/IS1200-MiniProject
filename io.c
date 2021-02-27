@@ -91,7 +91,7 @@ void check_game_buttons() {
                 game_state = WRITING_HIGHSCORE;
             break;
         case WRITING_HIGHSCORE:
-            if(initials[selected_initial] != 65 != 1 && clicks & 0x1) 
+            if(initials[selected_initial] != 65 && clicks & 0x1) 
                 initials[selected_initial]--;
             if(initials[selected_initial] != 90 && clicks & 0x2) 
                 initials[selected_initial]++;
