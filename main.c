@@ -1,7 +1,6 @@
 #include <stdint.h>
 #include <pic32mx.h>
 #include "mipslab.h"
-#include "i2c-defs.h" /* Declarations of I2C-specific addresses */
 
 uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 int timeoutcount = 0;
@@ -20,6 +19,7 @@ int main(void) {
     setup_leds();
     setup_user_inputs();
     setup_clock();
+    i2c_init();
 	return 0;
 }
 

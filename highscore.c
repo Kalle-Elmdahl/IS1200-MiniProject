@@ -1,7 +1,7 @@
 #include <stdint.h>   /* Declarations of uint_32 and the like */
 #include <pic32mx.h>  /* Declarations of system-specific addresses etc */
-#include "mipslab.h"  /* Declatations for game */
-#include "i2c-defs.h" /* Declarations of I2C-specific addresses */
+#include "mipslab.h"  /* Declarations for game */
+
 
 void save_highscore(char *initials, int score) {
 
@@ -21,6 +21,7 @@ void save_highscore(char *initials, int score) {
     } 
 
 }
+
 
 
 /*
@@ -48,7 +49,7 @@ void write_to_memory() {
     i2c_stop();
 }
 */
-
+/*
 void write_to_memory() {
 
     
@@ -142,6 +143,8 @@ void highscore_read() {
 
     */
 
+   /*
+
     char entry[5];
     short address = 0x0001000;
     int len = 4;
@@ -219,3 +222,4 @@ char memory_read(short address, int len) { // send address: (0x1 << 12)
 
     return char_at_memory;
 } 
+*/

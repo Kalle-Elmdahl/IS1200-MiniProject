@@ -137,35 +137,6 @@ int check_for_start() {
     game_state = GAME_OVER;
     game_mode = ONE_PLAYER; // Set game mode to 1 player default
     game_speed = NORMAL;
-    
-    short address = 0x1000;
-    int data = 1234567123;
-    write_int(address, data);
-
-    /*memory_write_data[0] = 'D';
-    memory_write_data[1] = 'C';
-    memory_write_data[2] = 'B';
-    memory_write_data[3] = 'A';
-
-    write_to_memory(0x0001000);*/
-
-    /*
-    int i;
-
-    char data[9];
-    data[0] = 'E';
-    data[1] = 'F';
-    data[2] = 'G';
-    data[3] = 'H';
-    data[4] = 'I';
-    data[5] = 'J';
-    data[6] = 'K';
-    data[7] = 'L';
-    data[8] = 0;
-
-    memory_write(data,0x1000);
-    */
-
 
     return 1;
 }

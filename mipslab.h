@@ -43,8 +43,8 @@ uint8_t player_1x [120]; // Initalize array outside of struct because reasons
 uint8_t player_1y [120]; // Initalize array outside of struct because reasons
 uint8_t player_2x [120]; // Initalize array outside of struct because reasons
 uint8_t player_2y [120]; // Initalize array outside of struct because reasons
-char memory_write_data[8];
-short memory_address;
+char memory_write_data[8]; // Assign chars to be written to memory
+char memory_read_data[8]; // Read chars will end up in this array
 
 /* setup.c */
 void setup_ports( void );
@@ -54,6 +54,7 @@ volatile int* E;
 void setup_leds( void );
 void setup_user_inputs( void );
 void setup_clock( void );
+void i2c_init( void);
 
 /* game.c */
 struct Snake player1;
@@ -160,9 +161,6 @@ const uint8_t const sq_obstacle[5][5];
 const uint8_t const sq_obstacle_animation[5][5];
 
 /* highscore.c */
-
-
-
 struct highscore {
     int score;
     char first_name;
@@ -172,8 +170,12 @@ struct highscore {
 struct highscore highscores[3]; 
 
 void highscore_read();
-void write_to_memory();
 void memory_write(char *data, short address);
 char memory_read(short address, int len);
 void write_int(short address, int data);
 int read_int(short address);
+
+/* memory.c */
+
+void write_to_memory( void ); // Will write the contents of char[] write_to_memory to (short address) for the amount (int len)
+void read_from_memory( void ); // Will read the contents of address for the amount (int len)

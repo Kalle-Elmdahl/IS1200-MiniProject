@@ -110,6 +110,11 @@ void draw_credits() {
 
 void draw_highscore() {
 
+    // write_to_memory();
+    read_from_memory();
+
+    draw_text(0,0, memory_read_data);
+
 /*     char data[5];
     data[0] = 'D';
     data[1] = 'C';
@@ -131,14 +136,8 @@ void draw_highscore() {
     memory_address = 0x0001000;
     write_to_memory();
     */
-    short address = 0x1000;
-    int data = 1234567123;
-    write_int(address, data);
-    int memory = read_int(address);
-    char *memory_char_thing = &memory;
-    *memory_char_thing += 33;
-    draw_text(0, 0, memory_char_thing);
 
+   /* WORKING FUNCTION BELOW ---
     int i;
     for (i = 0; i < 3; i ++) {
         char name[3] = {highscores[i].first_name, highscores[i].last_name, 0};
@@ -151,6 +150,8 @@ void draw_highscore() {
         draw_text(0,i,name);
         draw_text(50,i,score);
      }
+
+     */
     
 
     // highscore_read();

@@ -1,6 +1,9 @@
 #ifndef _MEMORY_H_
 #define _MEMORY_H_
 
+#define WRITE 0xA0
+#define READ 0xA1
+
 typedef unsigned char byte;
 
 /* Wait for I2C bus to become idle 
@@ -11,12 +14,12 @@ void i2c_idle();
 /* Send one byte on I2C bus, return ack/nack status of transaction 
  * Author: h4xxel 
  * */
-int i2c_send(byte data);
+int i2c_send(uint8_t data);
 
 /* Receive one byte from I2C bus 
  * Author: h4xxel 
  */
-byte i2c_recv();
+uint8_t i2c_recv();
 
 /* Send acknowledge conditon on the bus 
  * Author: h4xxel 
@@ -81,6 +84,3 @@ char* read_char(short address, int len);
 void i2c_init();
 
 #endif  // _MEMORY_H_
-
-#define EEPROM_WRITE 0xA0 // 1010 000 (0)
-#define EEPROM_READ 0xA1  // 1010 000 (1)
