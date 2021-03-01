@@ -3,9 +3,8 @@
 #include <pic32mx.h>
 #include "mipslab.h"  /* Declarations for game */
 
-#define WRITE 0xA0
-#define READ 0xA1
-// #define address 0x1000
+#define WRITE 0xA0 // Tell the i2c to initiate a write operation
+#define READ 0xA1 // Tell the i2c to initiate a read operation
 
 void delay(int cyc) {
 	int i;
@@ -69,41 +68,16 @@ void i2c_stop() {
 	i2c_idle();
 }
 
-/* Convert 8.8 bit fixed point to string representation
-char *fixed_to_string(uint16_t num, char *buf) {
-	bool neg = false;
-	uint32_t n;
-	char *tmp;
-	
-	if(num & 0x8000) {
-		num = ~num + 1;
-		neg = true;
-	}
-	
-	buf += 4;
-	n = num >> 8;
-	tmp = buf;
-	do {
-		*--tmp = (n  % 10) + '0';
-		n /= 10;
-	} while(n);
-	if(neg)
-		*--tmp = '-';
-	
-	n = num;
-	if(!(n & 0xFF)) {
-		*buf = 0;
-		return tmp;
-	}
-	*buf++ = '.';
-	while((n &= 0xFF)) {
-		n *= 10;
-		*buf++ = (n >> 8) + '0';
-	}
-	*buf = 0;
-	
-	return tmp;
-}
+/*
+
+function to write_to_memory
+accepts: 
+- char pointer write_data (With contents to write)
+- int memory_address (location to write to)
+- int len (amount of bytes to write)
+
+The contents (to the amount of len) of char pointer
+write data is stored at the desired memory location.
 
 */
 
@@ -130,6 +104,19 @@ void write_to_memory(char* write_data, int memory_address, int len) {
     clear_memory_data();
 
 }
+
+
+/*
+
+function to read_from_memory
+accepts: 
+- int memory_address (location to read from)
+- int len (amount of bytes to read)
+
+Output is stored in global char pointer:
+memory_read_data*
+
+*/
 
 void read_from_memory(int memory_address, int len) {
 
@@ -177,15 +164,6 @@ void clear_memory_data() {
     }
 }
 
-/*
-uint32_t strlen(char *str) {
-	uint32_t n = 0;
-	while(*str++)
-		n++;
-	return n;
-}
-*/
-
 
 // Function to reset current highscores from meory.
 void clear_highscore_memory() {
@@ -194,3 +172,55 @@ void clear_highscore_memory() {
     for (i = 0; i < 3; i ++)
         write_to_memory(empty,(0x1000) * (i+1),4);
 }
+
+
+
+// BELOW CAN BE REMOVED
+
+/* Convert 8.8 bit fixed point to string representation
+char *fixed_to_string(uint16_t num, char *buf) {
+	bool neg = false;
+	uint32_t n;
+	char *tmp;
+	
+	if(num & 0x8000) {
+		num = ~num + 1;
+		neg = true;
+	}
+	
+	buf += 4;
+	n = num >> 8;
+	tmp = buf;
+	do {
+		*--tmp = (n  % 10) + '0';
+		n /= 10;
+	} while(n);
+	if(neg)
+		*--tmp = '-';
+	
+	n = num;
+	if(!(n & 0xFF)) {
+		*buf = 0;
+		return tmp;
+	}
+	*buf++ = '.';
+	while((n &= 0xFF)) {
+		n *= 10;
+		*buf++ = (n >> 8) + '0';
+	}
+	*buf = 0;
+	
+	return tmp;
+}
+
+*/
+
+
+/*
+uint32_t strlen(char *str) {
+	uint32_t n = 0;
+	while(*str++)
+		n++;
+	return n;
+}
+*/
