@@ -5,7 +5,7 @@
 
 #define WRITE 0xA0
 #define READ 0xA1
-#define address 0x1000
+// #define address 0x1000
 
 void delay(int cyc) {
 	int i;
@@ -69,7 +69,7 @@ void i2c_stop() {
 	i2c_idle();
 }
 
-/* Convert 8.8 bit fixed point to string representation*/
+/* Convert 8.8 bit fixed point to string representation
 char *fixed_to_string(uint16_t num, char *buf) {
 	bool neg = false;
 	uint32_t n;
@@ -104,6 +104,8 @@ char *fixed_to_string(uint16_t num, char *buf) {
 	
 	return tmp;
 }
+
+*/
 
 void write_to_memory(char* write_data, int memory_address, int len) {
 
@@ -162,6 +164,9 @@ void read_from_memory(int memory_address, int len) {
 
 }
 
+// Clean up function, not really necessary 
+// but tidies up after memory write
+
 void clear_memory_data() {
 
     int i;
@@ -170,20 +175,22 @@ void clear_memory_data() {
         memory_read_data[i] = 0;
         memory_write_data[i] = 0;
     }
-
 }
 
-
+/*
 uint32_t strlen(char *str) {
 	uint32_t n = 0;
 	while(*str++)
 		n++;
 	return n;
 }
+*/
 
+
+// Function to reset current highscores from meory.
 void clear_highscore_memory() {
     int i;
     char empty[3] = {0, 0, 0};
     for (i = 0; i < 3; i ++)
-        write_to_memory(empty,(0x1000) * (i+1),3);
+        write_to_memory(empty,(0x1000) * (i+1),4);
 }
