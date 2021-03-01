@@ -138,8 +138,8 @@ void read_from_memory(int memory_address, int len) {
 		i2c_start();
 	} while(!i2c_send(WRITE));
 	
-    i2c_send(memory_address >> 8);
-    i2c_send(memory_address & 0xFF);
+    i2c_send(memory_address >> 8); // MSB
+    i2c_send(memory_address & 0xFF); // LSB
 		
 	/* Now send another start condition and address of the memory to be read with
 	read mode (lowest bit = 1) until the i2c sends acknowledge condition */
@@ -154,6 +154,7 @@ void read_from_memory(int memory_address, int len) {
 	    i2c_ack();
     }
 
+    // End sequence by nack after last recieve
 	receive_buffer = i2c_recv();
     i2c_nack();
 

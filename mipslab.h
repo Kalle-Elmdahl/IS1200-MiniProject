@@ -165,6 +165,7 @@ struct highscore {
     int score;
     char first_name;
     char last_name;
+    char letters[3];
 };
 void save_highscore_to_memory( void );
 struct highscore highscores[3]; 

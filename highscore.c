@@ -2,6 +2,10 @@
 #include <pic32mx.h>  /* Declarations of system-specific addresses etc */
 #include "mipslab.h"  /* Declarations for game */
 
+ // Highscore positions are located at three different addresses.
+ // 1:st position at 0x1000
+ // 2:nd position at 0x2000
+ // 3:rd position at 0x3000
  int highscore_address[3] = {0x1000, 0x2000, 0x3000};
 
 
@@ -27,10 +31,6 @@ void save_highscore(char *initials, int score) {
 void init_higscores( void ){
 
     int i;
-
-    /* highscore_address[0] = 0x1000;
-    highscore_address[0] = 0x2000;
-    highscore_address[0] = 0x3000; */
     
     for (i = 0; i < 3; i ++) {
         read_from_memory(highscore_address[i], 3);
