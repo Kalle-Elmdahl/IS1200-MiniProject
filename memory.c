@@ -105,34 +105,31 @@ char *fixed_to_string(uint16_t num, char *buf) {
 	return tmp;
 }
 
-void write_to_memory() {
+void write_to_memory(char* write_data, int memory_address, int len) {
 
     int i;
 
-	memory_write_data[0] = 67;
-	memory_write_data[1] = 66;
-	memory_write_data[2] = 67;
-	memory_write_data[3] = 0;
-	memory_write_data[4] = 69;
-	memory_write_data[5] = 70;
-	memory_write_data[6] = 71;
-	memory_write_data[7] = 0;
+    // Add memory to be written to variabel to write into memory
+    for (i = 0; i < len; i ++)
+        memory_write_data[i] = write_data[i];
 
     do {
         i2c_start();
     } while (!i2c_send(WRITE));
 
-    i2c_send(address >> 8);
-    i2c_send(address & 0xFF);
+    i2c_send(memory_address >> 8); // MSB
+    i2c_send(memory_address & 0xFF); // LSB
 
-	for (i = 0; i < 4; i ++)
+	for (i = 0; i < len; i ++)
 		i2c_send(memory_write_data[i]);
 
     i2c_stop();
 
+    clear_memory_data();
+
 }
 
-void read_from_memory() {
+void read_from_memory(int memory_address, int len) {
 
     int i; 
 	uint8_t receive_buffer = I2C1RCV;
@@ -141,26 +138,39 @@ void read_from_memory() {
 		i2c_start();
 	} while(!i2c_send(WRITE));
 	
-    i2c_send(address >> 8);
-    i2c_send(address & 0xFF);
+    i2c_send(memory_address >> 8);
+    i2c_send(memory_address & 0xFF);
 		
-	/* Now send another start condition and address of the temperature sensor with
-	read mode (lowest bit = 1) until the temperature sensor sends
-	acknowledge condition */
+	/* Now send another start condition and address of the memory to be read with
+	read mode (lowest bit = 1) until the i2c sends acknowledge condition */
 	
     do {
 		i2c_start();
 	} while(!i2c_send(READ));
 
-	memory_read_data[0] = i2c_recv();
-	i2c_ack();
-
+    for (i = 0; i < len; i ++)
+    {
+        memory_read_data[i] = i2c_recv();
+	    i2c_ack();
+    }
 
 	receive_buffer = i2c_recv();
     i2c_nack();
+    
     i2c_stop();
+
 }
 
+void clear_memory_data() {
+
+    int i;
+
+    for (i = 0; i < 12; i ++) {
+        memory_read_data[i] = 0;
+        memory_write_data[i] = 0;
+    }
+
+}
 
 
 uint32_t strlen(char *str) {

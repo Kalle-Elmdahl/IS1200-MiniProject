@@ -43,8 +43,8 @@ uint8_t player_1x [120]; // Initalize array outside of struct because reasons
 uint8_t player_1y [120]; // Initalize array outside of struct because reasons
 uint8_t player_2x [120]; // Initalize array outside of struct because reasons
 uint8_t player_2y [120]; // Initalize array outside of struct because reasons
-char memory_write_data[8]; // Assign chars to be written to memory
-char memory_read_data[8]; // Read chars will end up in this array
+char memory_write_data[12]; // Assign chars to be written to memory
+char memory_read_data[12]; // Read chars will end up in this array
 
 /* setup.c */
 void setup_ports( void );
@@ -166,16 +166,13 @@ struct highscore {
     char first_name;
     char last_name;
 };
-
+void save_highscore_to_memory( void );
 struct highscore highscores[3]; 
 
-void highscore_read();
-void memory_write(char *data, short address);
-char memory_read(short address, int len);
-void write_int(short address, int data);
-int read_int(short address);
+void init_higscores( void );
 
 /* memory.c */
 
-void write_to_memory( void ); // Will write the contents of char[] write_to_memory to (short address) for the amount (int len)
-void read_from_memory( void ); // Will read the contents of address for the amount (int len)
+void write_to_memory( char* write_data, int memory_address, int len ); // Will write the contents of char[] write_to_memory to (short address) for the amount (int len)
+void read_from_memory( int memory_address, int len ); // Will read the contents of address for the amount (int len)
+void clear_memory_data();
