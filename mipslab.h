@@ -168,7 +168,6 @@ struct highscore {
 };
 void save_highscore_to_memory( void );
 struct highscore highscores[3]; 
-
 void init_higscores( void );
 
 /* memory.c */
