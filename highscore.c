@@ -48,9 +48,9 @@ void save_highscore_to_memory() {
     for (i = 0; i < 3; i ++) {
 
         char highscore_to_save[3];
-        highscore_to_save[i] = highscores[i].first_name;
-        highscore_to_save[i] = highscores[i].last_name;
-        highscore_to_save[i] = highscores[i].score;
+        highscore_to_save[0] = highscores[i].first_name;
+        highscore_to_save[1] = highscores[i].last_name;
+        highscore_to_save[2] = highscores[i].score;
 
         write_to_memory(highscore_to_save, highscore_address[i], 3);
     }

@@ -113,13 +113,6 @@ void draw_highscore() {
     // WORKING FUNCTION BELOW ---
     int i;
 
-     // clear memory
-/* 
-     char empty[3] = {0, 0, 0};
-     for (i = 0; i < 3; i ++)
-        write_to_memory(empty,(0x1000) * (i+1),3);
-        */
-
     init_higscores();
 
     for (i = 0; i < 3; i ++) {

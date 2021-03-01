@@ -176,3 +176,4 @@ void init_higscores( void );
 void write_to_memory( char* write_data, int memory_address, int len ); // Will write the contents of char[] write_to_memory to (short address) for the amount (int len)
 void read_from_memory( int memory_address, int len ); // Will read the contents of address for the amount (int len)
 void clear_memory_data();
+void clear_highscore_memory();

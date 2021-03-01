@@ -156,7 +156,7 @@ void read_from_memory(int memory_address, int len) {
 
 	receive_buffer = i2c_recv();
     i2c_nack();
-    
+
     i2c_stop();
 
 }
@@ -178,4 +178,11 @@ uint32_t strlen(char *str) {
 	while(*str++)
 		n++;
 	return n;
+}
+
+void clear_highscore_memory() {
+    int i;
+    char empty[3] = {0, 0, 0};
+    for (i = 0; i < 3; i ++)
+        write_to_memory(empty,(0x1000) * (i+1),3);
 }
