@@ -87,8 +87,11 @@ void write_to_memory(char* write_data, int memory_address, int len) {
 
     // Add memory to be written to variable to write into memory
 	// Possibly redundant
+
+	/*
     for (i = 0; i < len; i ++)
         memory_write_data[i] = write_data[i];
+	*/
 
     do {
         i2c_start();
@@ -103,7 +106,9 @@ void write_to_memory(char* write_data, int memory_address, int len) {
     i2c_stop();
 
 	// Possibly redundant
+	/*
     clear_memory_data();
+	*/
 
 }
 
@@ -123,7 +128,7 @@ memory_read_data*
 void read_from_memory(int memory_address, int len) {
 
     int i; 
-	uint8_t receive_buffer = I2C1RCV;
+	uint8_t receive_buffer = I2C1RCV; // Empty recieve buffer
 
     do {
 		i2c_start();
