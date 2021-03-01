@@ -86,6 +86,7 @@ void write_to_memory(char* write_data, int memory_address, int len) {
     int i;
 
     // Add memory to be written to variable to write into memory
+	// Possibly redundant
     for (i = 0; i < len; i ++)
         memory_write_data[i] = write_data[i];
 
@@ -97,10 +98,11 @@ void write_to_memory(char* write_data, int memory_address, int len) {
     i2c_send(memory_address & 0xFF); // LSB
 
 	for (i = 0; i < len; i ++)
-		i2c_send(memory_write_data[i]);
+		i2c_send(write_data[i]);
 
     i2c_stop();
 
+	// Possibly redundant
     clear_memory_data();
 
 }
@@ -146,18 +148,15 @@ void read_from_memory(int memory_address, int len) {
     // End sequence by nack after last recieve
 	receive_buffer = i2c_recv();
     i2c_nack();
-
     i2c_stop();
 
 }
 
 // Clean up function, not really necessary 
 // but tidies up after memory write
-
 void clear_memory_data() {
 
     int i;
-
     for (i = 0; i < 12; i ++) {
         memory_read_data[i] = 0;
         memory_write_data[i] = 0;
@@ -172,55 +171,3 @@ void clear_highscore_memory() {
     for (i = 0; i < 3; i ++)
         write_to_memory(empty,(0x1000) * (i+1),4);
 }
-
-
-
-// BELOW CAN BE REMOVED
-
-/* Convert 8.8 bit fixed point to string representation
-char *fixed_to_string(uint16_t num, char *buf) {
-	bool neg = false;
-	uint32_t n;
-	char *tmp;
-	
-	if(num & 0x8000) {
-		num = ~num + 1;
-		neg = true;
-	}
-	
-	buf += 4;
-	n = num >> 8;
-	tmp = buf;
-	do {
-		*--tmp = (n  % 10) + '0';
-		n /= 10;
-	} while(n);
-	if(neg)
-		*--tmp = '-';
-	
-	n = num;
-	if(!(n & 0xFF)) {
-		*buf = 0;
-		return tmp;
-	}
-	*buf++ = '.';
-	while((n &= 0xFF)) {
-		n *= 10;
-		*buf++ = (n >> 8) + '0';
-	}
-	*buf = 0;
-	
-	return tmp;
-}
-
-*/
-
-
-/*
-uint32_t strlen(char *str) {
-	uint32_t n = 0;
-	while(*str++)
-		n++;
-	return n;
-}
-*/
