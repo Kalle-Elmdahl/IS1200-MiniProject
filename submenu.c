@@ -8,8 +8,10 @@ void draw_game_mode();
 void draw_speed();
 void update_game_mode(int btns);
 void update_speed(int btns);
+void update_difficulty(int btns);
 void draw_credits();
 void draw_highscore();
+void draw_difficulty();
 int current_list_item = 0;
 
 void init_sub_menu() {
@@ -29,6 +31,9 @@ void draw_sub_menu() {
             break;
         case HIGHSCORE:
             draw_highscore();
+            break;
+        case DIFFICULTY:
+            draw_difficulty();
             break;
         default:
             return;
@@ -54,6 +59,9 @@ void update_sub_menu(int btns) {
             break;
         case SPEED:
             update_speed(btns);
+            break;
+        case DIFFICULTY:
+            update_difficulty(btns);
             break;
     }
 }
@@ -127,4 +135,21 @@ void draw_highscore() {
         draw_text(50,i,score);
      }
 
+}
+
+void draw_difficulty() {
+    draw_text(LIST_LEFT_PADDING, 0, "Easy");
+    draw_text(LIST_LEFT_PADDING, 1, "Medium");
+    draw_text(LIST_LEFT_PADDING, 2, "Hard");
+    draw_image(50, 2 + current_list_item * 8, 3, 5, &arrow_left[0][0]);
+    draw_image(5, 2 + difficulty * 8, 6, 5, &check_box[0][0]);
+}
+
+void update_difficulty(int btns) {
+    if(btns & 0x8 && current_list_item != 0) current_list_item--;
+    if(btns & 0x4 && current_list_item != 2) current_list_item++;
+    if(btns & 0x2) {
+        difficulty = current_list_item;
+        game_state = GAME_OVER;
+    }
 }

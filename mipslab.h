@@ -35,8 +35,11 @@ enum game_modes game_mode;
 enum game_speeds {FAST, NORMAL, SLOW} game_speed;
 enum game_speeds game_speed;
 
-enum sub_menus {GAME_MODE, SPEED, CREDITS, HIGHSCORE} current_sub_menu;
+enum sub_menus {GAME_MODE, SPEED, CREDITS, HIGHSCORE, DIFFICULTY} current_sub_menu;
 enum sub_menus current_sub_menu;
+
+enum difficulties {EASY, MEDIUM, HARD} difficulty;
+enum difficulties difficulty;
 
 /* Global variables */
 uint8_t player_1x [120]; // Initalize array outside of struct because reasons
@@ -97,13 +100,14 @@ struct Apple {
 };
 
 /* Obstacles.c */
-void new_obstacle ( void );
-void display_obstacle ( void );
-struct Obstacle { 
+void initialize_obsticles ( void );
+void display_obstacles ( void );
+struct Obstacle {
     uint8_t x;
     uint8_t y;
-    uint8_t animation;
+    uint8_t type;
 };
+struct Obstacle current_obstacles[3];
 
 /* io.c */
 int check_user_inputs();
@@ -123,7 +127,7 @@ struct menu_item {
     int action;
 };
 extern int current_menu_position;
-#define number_of_menu_items 5
+#define number_of_menu_items 6
 
 /* submenu.c */
 void init_sub_menu( void );
@@ -157,8 +161,10 @@ const uint8_t const arrow_up[3][5];
 const uint8_t const arrow_down[3][5];
 const uint8_t const apple_icon[3][3];
 const uint8_t const check_box[5][6];
-const uint8_t const sq_obstacle[5][5];
-const uint8_t const sq_obstacle_animation[5][5];
+const uint8_t const obstacles[3][9][9];
+const uint8_t const obstacle_hit_boxes[3][3][3];
+
+const uint8_t const test_obstacle[9][9];
 
 /* highscore.c */
 struct highscore {

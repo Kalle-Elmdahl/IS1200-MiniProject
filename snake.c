@@ -7,10 +7,10 @@
 #define SNAKE_INITIAL_LENGTH 4 // Defines the inital length of the snake
 
 enum INITIAL_POSITIONS {
-    x1 = (1 + SNAKE_SIZE * 10), 
-    y1 = (1 + (SNAKE_SIZE * 3)),
-    x2 = (1 + MAX_X - SIDEBAR_WIDTH - SNAKE_SIZE * 10), 
-    y2 = (1 + (SNAKE_SIZE * 3))
+    x1 = (1 + SNAKE_SIZE * 5), 
+    y1 = (1 + SNAKE_SIZE),
+    x2 = (1 + MAX_X - SIDEBAR_WIDTH - SNAKE_SIZE * 5), 
+    y2 = (MAX_Y - SNAKE_SIZE * 2)
 };
 
 static const enum INITIAL_POSITIONS INITIAL_X_POSITIONS[] = {x1, x2};
@@ -57,7 +57,6 @@ struct Snake update_snake(struct Snake snake, struct Snake other_snake) {
     if(snake.should_grow == 1) {
         snake.length = snake.length + 1;
         snake.should_grow = 0;
-        new_obstacle();
     }
 
     for (i = snake.length; i > 0; i--) {
@@ -98,8 +97,26 @@ int is_valid_snake(struct Snake snake, struct Snake other_snake) {
     if(game_mode == TWO_PLAYER || game_mode == AI)
         for(i = 0; i <= other_snake.length; i++)
             if(snake.x[0] == other_snake.x[i] && snake.y[0] == other_snake.y[i]) return 0;
+        
+    int number_of_obstacles = 0, j, k;
 
-    if (snake.x[0] == obstacle.x && snake.y[0] == obstacle.y) return 0; // Snake is colliding with obstacle
+    switch(difficulty) {
+        case MEDIUM:
+            number_of_obstacles = 2;
+            break;
+        case HARD:
+            number_of_obstacles = 3;
+            break;
+    }
+
+    for(i = 0; i < number_of_obstacles; i++)
+        for(j = 0; j < 3; j++)
+            for(k = 0; k < 3; k++)
+                if(obstacle_hit_boxes[i][j][k])
+                    if(snake.x[0] == current_obstacles[i].x + k * 3 && snake.y[0] == current_obstacles[i].y + j * 3)
+                        return 0;
+
+    //if (snake.x[0] == obstacle.x && snake.y[0] == obstacle.y) return 0; // Snake is colliding with obstacle
 
     return 1;
 }

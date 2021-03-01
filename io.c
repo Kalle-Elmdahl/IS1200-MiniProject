@@ -137,6 +137,7 @@ int check_for_start() {
     game_state = GAME_OVER;
     game_mode = ONE_PLAYER; // Set game mode to 1 player default
     game_speed = NORMAL;
+    difficulty = EASY;
 
     return 1;
 }

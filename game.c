@@ -11,7 +11,7 @@ struct Obstacle obstacle;
 int losing_player;
 char score[4];
 int score_text_width;
-selected_initial = 0;
+int selected_initial = 0;
 
 void calculate_next_frame( void );
 void draw_game( void );
@@ -27,7 +27,7 @@ void game_init() {
 
     game_state = IN_GAME;
     new_apple();
-    new_obstacle();
+    initialize_obsticles();
 }
 
 
@@ -81,7 +81,7 @@ void draw_game() {
         display_snake(player2);
     
     display_apple();
-    display_obstacle();
+    display_obstacles();
 
 
     // Borders

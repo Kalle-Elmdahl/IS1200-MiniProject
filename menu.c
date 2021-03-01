@@ -74,6 +74,12 @@ const struct menu_item menu_items[number_of_menu_items] = {
         -1
     },
     {
+        "Difficulty",
+        43,
+        4,
+        -1
+    },
+    {
         "Credits",
         31,
         2,
