@@ -85,7 +85,7 @@ void write_to_memory(char* write_data, int memory_address, int len) {
 
     int i;
 
-    // Add memory to be written to variabel to write into memory
+    // Add memory to be written to variable to write into memory
     for (i = 0; i < len; i ++)
         memory_write_data[i] = write_data[i];
 
