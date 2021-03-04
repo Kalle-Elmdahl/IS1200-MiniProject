@@ -112,11 +112,9 @@ int is_valid_snake(struct Snake snake, struct Snake other_snake) {
     for(i = 0; i < number_of_obstacles; i++)
         for(j = 0; j < 3; j++)
             for(k = 0; k < 3; k++)
-                if(obstacle_hit_boxes[i][j][k])
+                if(obstacle_hit_boxes[current_obstacles[i].type][j][k])
                     if(snake.x[0] == current_obstacles[i].x + k * 3 && snake.y[0] == current_obstacles[i].y + j * 3)
                         return 0;
-
-    //if (snake.x[0] == obstacle.x && snake.y[0] == obstacle.y) return 0; // Snake is colliding with obstacle
 
     return 1;
 }
