@@ -91,11 +91,11 @@ int is_valid_snake(struct Snake snake, struct Snake other_snake) {
         snake.x[0] + SNAKE_SIZE > DISPLAY_WIDTH - SIDEBAR_WIDTH || 
         snake.y[0] + SNAKE_SIZE > DISPLAY_HEIGHT) return 0; // Snake is outside of world
     int i;
-    for(i = 4; i <= snake.length; i++) // first body part able to collide is the forth, (i = 4)
+    for(i = 4; i < snake.length; i++) // first body part able to collide is the forth, (i = 4)
         if(snake.x[0] == snake.x[i] && snake.y[0] == snake.y[i]) return 0; // Snake is colliding with itself
 
     if(game_mode == TWO_PLAYER || game_mode == AI)
-        for(i = 0; i <= other_snake.length; i++)
+        for(i = 0; i < other_snake.length; i++)
             if(snake.x[0] == other_snake.x[i] && snake.y[0] == other_snake.y[i]) return 0;
         
     int number_of_obstacles = 0, j, k;

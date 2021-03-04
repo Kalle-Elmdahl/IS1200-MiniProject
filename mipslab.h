@@ -83,12 +83,14 @@ struct Snake {
     int length;
 };
 
-/* ai.c */
-char get_AI_direction();
-
 struct Snake initialize_snake( uint8_t );
 void display_snake(struct Snake);
 struct Snake update_snake(struct Snake, struct Snake);
+
+/* ai.c */
+void check_ai_path(int new_path);
+extern uint8_t ai_debug;
+void init_ai();
 
 /* Apple.c */
 void new_apple( void );

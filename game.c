@@ -25,6 +25,8 @@ void game_init() {
     if (game_mode == TWO_PLAYER || game_mode == AI)
         player2 = initialize_snake(1);
 
+    if(game_mode == AI) init_ai();
+
     game_state = IN_GAME;
     new_apple();
     initialize_obsticles();
@@ -54,6 +56,7 @@ void calculate_next_frame() {
         player1.should_grow = 1;
 
     if(game_mode == TWO_PLAYER || game_mode == AI) {
+        if(game_mode == AI) check_ai_path(player1.should_grow); // if player one is eating the apple, a new path should be generated
         player2 = update_snake(player2, player1);
         if(is_eating(player2))
             player2.should_grow = 1;

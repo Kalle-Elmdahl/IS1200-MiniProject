@@ -34,6 +34,10 @@ int check_user_inputs() {
 
     if(sws & 0b1) {
         if(app_state != GAME && game_state != IN_GAME) game_init(); // Conditions for starting the game
+        if(app_state != GAME && game_mode == AI)
+            if(btns & 0x8) ai_debug = 1;
+            else ai_debug = 0;
+        
         app_state = GAME;
     } else if(!(sws & 0b1) && app_state == GAME) {
         if (game_state == WRITING_HIGHSCORE) {
@@ -67,9 +71,6 @@ void check_game_buttons() {
             // Button 4 -> left
             if ((btns & 0x8) && player1.direction != 'r')
                 player1.next_direction = 'l';
-
-            if (game_mode == AI)
-                player2.next_direction = get_AI_direction();
 
             if (game_mode != TWO_PLAYER) return;
 
@@ -135,7 +136,7 @@ int check_for_start() {
     
     app_state = MENU;
     game_state = GAME_OVER;
-    game_mode = ONE_PLAYER; // Set game mode to 1 player default
+    game_mode = AI/* ONE_PLAYER */; // Set game mode to 1 player default
     game_speed = NORMAL;
     difficulty = EASY;
 
