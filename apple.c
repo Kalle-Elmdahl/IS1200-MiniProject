@@ -23,6 +23,26 @@ void new_apple() {
                 }
             }
         }
+
+        int number_of_obstacles = 0;
+        switch(difficulty) {
+            case MEDIUM:
+                number_of_obstacles = 2;
+                break;
+            case HARD:
+                number_of_obstacles = 3;
+                break;
+        }
+
+        for(i = 0; i < number_of_obstacles; i++) {
+            if(apple.x >= current_obstacles[i].x && apple.x <= current_obstacles[i].x + 9) {
+                if(apple.y >= current_obstacles[i].y && apple.y <= current_obstacles[i].y + 9) {
+                    valid_pos = 0;
+                    break,
+                }
+            }
+        }
+    
     } while(valid_pos == 0);
 }
 
