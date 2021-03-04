@@ -53,15 +53,15 @@ char check_for_coming_collision() {
 
     if (new_direction == 'u') // AI is going up
         if (check_for_collision_with_snakes(posy - SNAKE_SIZE)) {
-            if (check_for_collision_with_snakes(posx + SNAKE_SIZE)) 
+            if (check_for_collision_with_snakes(posx + SNAKE_SIZE) && player2.direction != 'r')
                 return 'l';
             else
                 return 'r';
-        }
+            }
 
     if (new_direction == 'd') // AI is going down
         if (check_for_collision_with_snakes(posy + SNAKE_SIZE)) {
-            if (check_for_collision_with_snakes(posx + SNAKE_SIZE)) 
+            if (check_for_collision_with_snakes(posx + SNAKE_SIZE) && player2.direction != 'l') 
                 return 'l';
             else
                 return 'r';
@@ -69,7 +69,7 @@ char check_for_coming_collision() {
 
     if (new_direction == 'l') // AI is going left
         if (check_for_collision_with_snakes(posx - SNAKE_SIZE)) {
-            if (check_for_collision_with_snakes(posy + SNAKE_SIZE)) 
+            if (check_for_collision_with_snakes(posy + SNAKE_SIZE) && player2.direction != 'u') 
                 return 'u';
             else
                 return 'd';
@@ -77,7 +77,7 @@ char check_for_coming_collision() {
 
     if (new_direction == 'r') // AI is going right
         if (check_for_collision_with_snakes(posx + SNAKE_SIZE)) {
-            if (check_for_collision_with_snakes(posy + SNAKE_SIZE)) 
+            if (check_for_collision_with_snakes(posy + SNAKE_SIZE) && player2.direction != 'u') 
                 return 'u';
             else
                 return 'd';
