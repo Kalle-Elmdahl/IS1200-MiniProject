@@ -4,7 +4,7 @@
 
 char preferred_direction();
 char check_for_coming_collision();
-int check_for_collision(struct Snake snake, struct Snake other_snake, int pos);
+int check_for_collision(int pos);
 char new_direction;
 
 char get_AI_direction() {
@@ -53,8 +53,8 @@ char check_for_coming_collision() {
 
     if (new_direction == 'u') // AI is going up
         for (i = posy - SNAKE_SIZE; i > posy - steps; i -= SNAKE_SIZE) 
-            if (check_for_collision(player1, player2, i)) {
-                if (check_for_collision(player1, player2, posx + SNAKE_SIZE)) // Check for collision with other player if going right
+            if (check_for_collision_with_snakes(i)) {
+                if (check_for_collision_with_snakes(posx + SNAKE_SIZE)) // Check for collision with other player if going right
                     return 'l'; // Collision detected, go left
                 else
                     return 'r'; // No collision with other player detected, go right 
@@ -62,8 +62,8 @@ char check_for_coming_collision() {
 
     if (new_direction == 'd') // AI is going down
         for (i = posy + SNAKE_SIZE; i > posy + steps; i += SNAKE_SIZE) 
-            if (check_for_collision(player1, player2, i)) {
-                if (check_for_collision(player1, player2, posx + SNAKE_SIZE)) // Check for collision with other player if going right
+            if (check_for_collision_with_snakes(i)) {
+                if (check_for_collision_with_snakes(posx + SNAKE_SIZE)) // Check for collision with other player if going right
                     return 'l'; // Collision detected, go left
                 else
                     return 'r'; // No collision with other player detected, go right 
@@ -71,8 +71,8 @@ char check_for_coming_collision() {
 
     if (new_direction == 'r') // AI is going right
         for (i = posx + SNAKE_SIZE; i < posx + steps; i += SNAKE_SIZE)
-            if (check_for_collision(player1, player2, i)) {
-                if (check_for_collision(player1, player2, posy + SNAKE_SIZE)) // Check for collision with other player if going down
+            if (check_for_collision_with_snakes(i)) {
+                if (check_for_collision_with_snakes(posy + SNAKE_SIZE)) // Check for collision with other player if going down
                     return 'u'; // Collision detected, go up
                 else
                     return 'd'; // No collision with other player detected, go down
@@ -80,8 +80,8 @@ char check_for_coming_collision() {
 
     if (new_direction == 'l') // AI is going left
         for (i = posx - SNAKE_SIZE; i > posx - steps; i -= SNAKE_SIZE)
-            if (check_for_collision(player1, player2, i)) {
-                if (check_for_collision(player1, player2, posy + SNAKE_SIZE)) // Check for collision with other player if going down
+            if (check_for_collision_with_snakes(i)) {
+                if (check_for_collision_with_snakes(posy + SNAKE_SIZE)) // Check for collision with other player if going down
                     return 'u'; // Collision detected, go up
                 else
                     return 'd'; // No collision with other player detected, go down
@@ -90,16 +90,16 @@ char check_for_coming_collision() {
     return new_direction;
 }
 
-int check_for_collision(struct Snake snake, struct Snake other_snake, int pos) {
+int check_for_collision_with_snakes(int pos) {
     
     int i;
 
-    for (i = 0; i <= snake.length; i ++) // Check for collision with other player
-        if(pos == snake.x[i] && snake.y[i] == pos)  // Collision detected with player 1, change direction and return
+    for (i = 0; i <= player1.length; i ++) // Check for collision with other player
+        if(pos == player1.x[i] && player1.y[i] == pos)  // Collision detected with player 1, change direction and return
             return 1;
 
-    for (i = 0; i <= other_snake.length; i ++) // Check for collision with other player
-        if(pos == other_snake.x[i] && other_snake.y[i] == pos)  // Collision detected with player 1, change direction and return
+    for (i = 0; i <= player2.length; i ++) // Check for collision with self
+        if(pos == player2.x[i] && player2.y[i] == pos)  // Collision detected with player 1, change direction and return
             return 1;
 
     return 0;
