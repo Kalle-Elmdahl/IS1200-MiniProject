@@ -52,7 +52,7 @@ char check_for_coming_collision() {
     int posy = player2.y[0]; // Check for player position Y
 
     if (new_direction == 'u') // AI is going up
-        for (i = posy - SNAKE_SIZE; i > posy - steps; i --) 
+        for (i = posy - SNAKE_SIZE; i > posy - steps; i -= SNAKE_SIZE) 
             if (check_for_collision(player1, i) || check_for_collision(player2, i)) {
                 if (check_for_collision(player1, posx + SNAKE_SIZE)) // Check for collision with other player if going right
                     return 'l'; // Collision detected, go left
@@ -61,7 +61,7 @@ char check_for_coming_collision() {
             }
 
     if (new_direction == 'd') // AI is going down
-        for (i = posy + SNAKE_SIZE; i > posy + steps; i ++) 
+        for (i = posy + SNAKE_SIZE; i > posy + steps; i += SNAKE_SIZE) 
             if (check_for_collision(player1, i) || check_for_collision(player2, i)) {
                 if (check_for_collision(player1, posx + SNAKE_SIZE)) // Check for collision with other player if going right
                     return 'l'; // Collision detected, go left
@@ -70,7 +70,7 @@ char check_for_coming_collision() {
             }
 
     if (new_direction == 'r') // AI is going right
-        for (i = posx + SNAKE_SIZE; i < posx + steps; i ++)
+        for (i = posx + SNAKE_SIZE; i < posx + steps; i += SNAKE_SIZE)
             if (check_for_collision(player1, i) || check_for_collision(player2, i)) {
                 if (check_for_collision(player1, posy + SNAKE_SIZE)) // Check for collision with other player if going down
                     return 'u'; // Collision detected, go up
@@ -79,7 +79,7 @@ char check_for_coming_collision() {
             }
 
     if (new_direction == 'l') // AI is going left
-        for (i = posx - SNAKE_SIZE; i > posx - steps; i --)
+        for (i = posx - SNAKE_SIZE; i > posx - steps; i -= SNAKE_SIZE)
             if (check_for_collision(player1, i) || check_for_collision(player2, i)) {
                 if (check_for_collision(player1, posy + SNAKE_SIZE)) // Check for collision with other player if going down
                     return 'u'; // Collision detected, go up
