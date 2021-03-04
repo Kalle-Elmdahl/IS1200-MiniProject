@@ -67,8 +67,8 @@ struct Obstacle obstacle;
 void game_init( void );
 void game_update( void );
 
-extern int selected_initial;
-char initials[3];
+extern int selected_letter;
+char letters[4];
 
 /* snake.c */
 #define SNAKE_WIDTH 3 // Defines the width of the snake
@@ -169,8 +169,9 @@ const uint8_t const test_obstacle[9][9];
 /* highscore.c */
 struct highscore {
     int score;
-    char first_name;
-    char last_name;
+    char first_letter;
+    char second_letter;
+    char third_letter;
     char letters[3];
 };
 void save_highscore_to_memory( void );

@@ -38,7 +38,7 @@ int check_user_inputs() {
     } else if(!(sws & 0b1) && app_state == GAME) {
         if (game_state == WRITING_HIGHSCORE) {
             // Save highscore
-            save_highscore(initials, player1.length);
+            save_highscore(letters, player1.length);
         }
         app_state = MENU;
         updated = 1;
@@ -95,14 +95,14 @@ void check_game_buttons() {
                 game_state = WRITING_HIGHSCORE;
             break;
         case WRITING_HIGHSCORE:
-            if(initials[selected_initial] != 65 && clicks & 0x1) 
-                initials[selected_initial]--;
-            if(initials[selected_initial] != 90 && clicks & 0x2) 
-                initials[selected_initial]++;
-            if(selected_initial != 1 && clicks & 0x4) 
-                selected_initial++;
-            if(selected_initial != 0 && clicks & 0x8) 
-                selected_initial--;
+            if(letters[selected_letter] != 65 && clicks & 0x1) 
+                letters[selected_letter]--;
+            if(letters[selected_letter] != 90 && clicks & 0x2) 
+                letters[selected_letter]++;
+            if(selected_letter != 1 && clicks & 0x4) 
+                selected_letter++;
+            if(selected_letter != 0 && clicks & 0x8) 
+                selected_letter--;
             break;
     }
 

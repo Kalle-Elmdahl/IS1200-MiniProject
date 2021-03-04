@@ -11,7 +11,7 @@ struct Obstacle obstacle;
 int losing_player;
 char score[4];
 int score_text_width;
-int selected_initial = 0;
+int selected_letter = 0;
 
 void calculate_next_frame( void );
 void draw_game( void );
@@ -102,9 +102,10 @@ void game_over(int player) {
     score_text_width = i * 5;
 
     // Reset highscore write
-    initials[0] = 65;
-    initials[1] = 65;
-    selected_initial = 0;
+    letters[0] = 65;
+    letters[1] = 65;
+    letters[2] = 65;
+    selected_letter = 0;
 }
 
 void display_game_over() {
@@ -146,8 +147,8 @@ void display_game_over() {
 void display_write_highscore() {
     draw_text(SCREEN_CENTER - 40, 0, "Enter your name");
 
-    draw_text(SCREEN_CENTER - 4, 1, initials);
-    draw_image(SCREEN_CENTER - 4 + selected_initial * 4, 16, 5, 3, &arrow_up[0][0]);
+    draw_text(SCREEN_CENTER - 4, 1, letters);
+    draw_image(SCREEN_CENTER - 4 + selected_letter * 4, 16, 5, 3, &arrow_up[0][0]);
 
     /* Sidebar */
     draw_rect(DISPLAY_WIDTH - SIDEBAR_WIDTH, 0, SIDEBAR_WIDTH, DISPLAY_HEIGHT);

@@ -124,7 +124,7 @@ void draw_highscore() {
     init_higscores();
 
     for (i = 0; i < 3; i ++) {
-        char name[3] = {highscores[i].first_name, highscores[i].last_name, 0};
+        char name[4] = {highscores[i].first_letter, highscores[i].second_letter, highscores[i].third_letter, 0};
         char score[4];
         int j = 0;
         if(highscores[i].score > 99) score[j++] = highscores[i].score / 100 + 48;
