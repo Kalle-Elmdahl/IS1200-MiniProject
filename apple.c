@@ -38,7 +38,7 @@ void new_apple() {
             if(apple.x >= current_obstacles[i].x && apple.x <= current_obstacles[i].x + 9) {
                 if(apple.y >= current_obstacles[i].y && apple.y <= current_obstacles[i].y + 9) {
                     valid_pos = 0;
-                    break,
+                    break;
                 }
             }
         }
