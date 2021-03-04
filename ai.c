@@ -52,6 +52,39 @@ char check_for_coming_collision() {
     int posy = player2.y[0]; // Check for player position Y
 
     if (new_direction == 'u') // AI is going up
+        if (check_for_collision_with_snakes(posy - SNAKE_SIZE)) {
+            if (check_for_collision_with_snakes(posx + SNAKE_SIZE)) 
+                return 'l';
+            else
+                return 'r';
+        }
+
+    if (new_direction == 'd') // AI is going down
+        if (check_for_collision_with_snakes(posy + SNAKE_SIZE)) {
+            if (check_for_collision_with_snakes(posx + SNAKE_SIZE)) 
+                return 'l';
+            else
+                return 'r';
+        }
+
+    if (new_direction == 'l') // AI is going left
+        if (check_for_collision_with_snakes(posx - SNAKE_SIZE)) {
+            if (check_for_collision_with_snakes(posy + SNAKE_SIZE)) 
+                return 'u';
+            else
+                return 'd';
+        }
+
+    if (new_direction == 'r') // AI is going right
+        if (check_for_collision_with_snakes(posx + SNAKE_SIZE)) {
+            if (check_for_collision_with_snakes(posy + SNAKE_SIZE)) 
+                return 'u';
+            else
+                return 'd';
+        }
+    /*
+
+    if (new_direction == 'u') // AI is going up
         for (i = posy - SNAKE_SIZE; i > posy - steps; i -= SNAKE_SIZE) 
             if (check_for_collision_with_snakes(i)) {
                 if (check_for_collision_with_snakes(posx + SNAKE_SIZE)) // Check for collision with other player if going right
@@ -86,6 +119,8 @@ char check_for_coming_collision() {
                 else
                     return 'd'; // No collision with other player detected, go down
             }
+
+            */
 
     return new_direction;
 }
