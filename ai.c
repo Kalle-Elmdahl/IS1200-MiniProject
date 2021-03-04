@@ -9,7 +9,7 @@ char new_direction;
 
 char get_AI_direction() {
     new_direction = preferred_direction();
-    new_direction = check_for_coming_collision();
+    // new_direction = check_for_coming_collision();
     return new_direction;
 }
 
