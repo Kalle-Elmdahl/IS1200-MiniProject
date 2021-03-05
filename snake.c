@@ -52,7 +52,7 @@ void display_snake(struct Snake snake) {
     }
 }
 
-struct Snake update_snake(struct Snake snake, struct Snake other_snake) {
+struct Snake update_snake(struct Snake snake) {
     int i;
     if(snake.should_grow == 1) {
         snake.length = snake.length + 1;

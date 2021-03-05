@@ -112,7 +112,6 @@ void setup_user_inputs() {
     // same principle as above, bits that are "1" are inputs
     TRISDSET = 0xfe0;
 	TRISFSET = 0x2; //Button 1
-
 	TRISDSET = 0xf; // PLAYER 2 INPUTS: Chipkit pin 3, 5, 6  & 9 -> RD0->RD3
 }
 

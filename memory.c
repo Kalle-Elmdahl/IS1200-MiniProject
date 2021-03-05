@@ -85,14 +85,6 @@ void write_to_memory(char* write_data, int memory_address, int len) {
 
     int i;
 
-    // Add memory to be written to variable to write into memory
-	// Possibly redundant
-
-	/*
-    for (i = 0; i < len; i ++)
-        memory_write_data[i] = write_data[i];
-	*/
-
     do {
         i2c_start();
     } while (!i2c_send(WRITE));
@@ -104,12 +96,6 @@ void write_to_memory(char* write_data, int memory_address, int len) {
 		i2c_send(write_data[i]);
 
     i2c_stop();
-
-	// Possibly redundant
-	/*
-    clear_memory_data();
-	*/
-
 }
 
 

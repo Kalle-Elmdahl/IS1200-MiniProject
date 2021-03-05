@@ -49,7 +49,7 @@ void game_update() {
 }
 
 void calculate_next_frame() {
-    player1 = update_snake(player1, player2);
+    player1 = update_snake(player1);
     int player_one_is_valid, player_two_is_valid;
     
     if(is_eating(player1))
@@ -57,7 +57,7 @@ void calculate_next_frame() {
 
     if(game_mode == TWO_PLAYER || game_mode == AI) {
         if(game_mode == AI) check_ai_path(player1.should_grow); // if player one is eating the apple, a new path should be generated
-        player2 = update_snake(player2, player1);
+        player2 = update_snake(player2);
         if(is_eating(player2))
             player2.should_grow = 1;
 
