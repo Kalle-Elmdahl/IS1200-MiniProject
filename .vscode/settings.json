@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "registers.h": "c",
-        "memory.h": "c"
-    }
-}
