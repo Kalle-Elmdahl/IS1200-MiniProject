@@ -14,6 +14,11 @@
 #define DISPLAY_TURN_OFF_VDD (PORTFSET = 0x40)
 #define DISPLAY_TURN_OFF_VBAT (PORTFSET = 0x20)
 
+/* 
+    Copyright for function setup_ports
+    Copyright (c) 2015, Axel Isaksson
+    Copyright (c) 2015, F Lundevall
+*/
 void setup_ports( void ) {
     /*
 	  This will set the peripheral bus clock to the same frequency
@@ -58,6 +63,11 @@ void setup_ports( void ) {
 	SPI2CONSET = 0x8000;
 }
 
+/* 
+    Copyright for function setup_display
+    Copyright (c) 2015, Axel Isaksson
+    Copyright (c) 2015, F Lundevall
+*/
 void setup_display(void) {
     DISPLAY_CHANGE_TO_COMMAND_MODE;
 	quicksleep(10);

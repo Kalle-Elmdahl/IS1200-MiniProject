@@ -2,4 +2,5 @@
 *.S.o
 .DS_Store
 outfile*
-/.deps
+.deps
+.vscode
