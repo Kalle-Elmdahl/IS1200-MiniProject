@@ -136,7 +136,7 @@ int check_for_start() {
     
     app_state = MENU;
     game_state = GAME_OVER;
-    game_mode = AI/* ONE_PLAYER */; // Set game mode to 1 player default
+    game_mode = ONE_PLAYER; // Set game mode to 1 player default
     game_speed = NORMAL;
     difficulty = EASY;
 

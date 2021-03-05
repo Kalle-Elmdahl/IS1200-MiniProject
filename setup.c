@@ -136,20 +136,6 @@ void setup_clock() {
     IECSET(0) = 0x1 << 7;
     IPCSET(1) = 0x1 << 27;
 
-    /* Maybe remove
-    // Enable interrupt for Switch 2 (INT2)
-    IECSET(0) = 0x1 << 11;
-    IPCSET(1) = 0x1 << 27;
-
-    // Enable interrupt for Switch 3 (INT3)
-    IECSET(0) = 0x1 << 15;
-    IPCSET(1) = 0x1 << 27;
-
-    // Enable interrupt for Switch 4 (INT4)
-    IECSET(0) = 0x1 << 19;
-    IPCSET(1) = 0x1 << 27;
-    */
-
 
     // IEC 8th bit enables Timer 2 according to MIPS ref sheet (p. 90): 
     // For both IEC and IPC:

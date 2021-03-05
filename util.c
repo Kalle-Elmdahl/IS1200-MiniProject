@@ -14,26 +14,8 @@
 #define DISPLAY_CHANGE_TO_COMMAND_MODE (PORTFCLR = 0x10)
 #define DISPLAY_CHANGE_TO_DATA_MODE (PORTFSET = 0x10)
 
-#define DISPLAY_ACTIVATE_RESET (PORTGCLR = 0x200)
-#define DISPLAY_DO_NOT_RESET (PORTGSET = 0x200)
-
-#define DISPLAY_ACTIVATE_VDD (PORTFCLR = 0x40)
-#define DISPLAY_ACTIVATE_VBAT (PORTFCLR = 0x20)
-
-#define DISPLAY_TURN_OFF_VDD (PORTFSET = 0x40)
-#define DISPLAY_TURN_OFF_VBAT (PORTFSET = 0x20)
-
 void update_display() {
-    uint8_t displayData[DISPLAY_ROWS][DISPLAY_WIDTH];
-    int i, j, k;
-    for(i = 0; i < DISPLAY_ROWS; i++) {
-        for(j = 0; j < DISPLAY_WIDTH; j++) {
-            uint8_t sum = 0;
-            for(k = 0; k < DISPLAY_ROW_HEIGHT; k++) sum |= pixels[i*8 + k][j] << k;
-            displayData[i][j] = sum ^ text[i][j]; // add drawn pixels or added text if both are on, the pixel is 0
-        }
-    }
-
+    int i, j, k, sum;
     for(i = 0; i < DISPLAY_ROWS; i++) {
 		DISPLAY_CHANGE_TO_COMMAND_MODE;
 		spi_send_recv(0x22);
@@ -42,12 +24,11 @@ void update_display() {
 		spi_send_recv(0x0);
 		spi_send_recv(0x10);
 		DISPLAY_CHANGE_TO_DATA_MODE;
-
-		for(j = 0; j < DISPLAY_WIDTH; j++) {
-			spi_send_recv(displayData[i][j]);
-		}
-	}
-
+        for(j = 0; j < DISPLAY_WIDTH; j++, sum = 0) {
+            for(k = 0; k < DISPLAY_ROW_HEIGHT; k++) sum |= pixels[i*8 + k][j] << k;
+			spi_send_recv(sum ^ text[i][j]);
+        }
+    }
 }
 
 void draw_text(int x, int y, char *s) {
@@ -56,7 +37,7 @@ void draw_text(int x, int y, char *s) {
 	int i, charx = 0, zeros_in_a_row = 0;
 
     while(*s) {
-        if(*s == 32) {
+        if(*s == 32) { // Space
             x += 4;
         } else {
             while (charx < CHAR_WIDTH) {
@@ -86,7 +67,7 @@ void draw_image(int x, int y, int w, int h, uint8_t *image) {
     for(j = 0; j < h; j++)
         for(i = 0; i < w; i++)
             pixels[j + y][i + x] ^= image[j * w + i];
-;
+
 }
 
 void clear_pixels() {

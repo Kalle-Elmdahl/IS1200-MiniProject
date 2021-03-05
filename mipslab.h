@@ -88,7 +88,7 @@ void display_snake(struct Snake);
 struct Snake update_snake(struct Snake);
 
 /* ai.c */
-void check_ai_path(int new_path);
+void check_ai_path();
 extern uint8_t ai_debug;
 void init_ai();
 
