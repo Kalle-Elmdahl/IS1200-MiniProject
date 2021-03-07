@@ -1,3 +1,20 @@
+/************************************************************
+
+         Very Advanced Snake on Very Small Display
+
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~ highscore.c ~~~~~~~~~~~~~~~~~~~~~~~~
+
+Erik is the architect behind the highscore logic and communication
+with the memory functions.
+
+Erik and Kalle collaborated on the project and have both contributed 
+to the code in highscore.c
+
+************************************************************/
+
 #include <stdint.h>   /* Declarations of uint_32 and the like */
 #include <pic32mx.h>  /* Declarations of system-specific addresses etc */
 #include "snake.h"  /* Declarations for game */

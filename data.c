@@ -7,7 +7,7 @@ course IS1200 during spring 2021.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~ data.c ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Erik and Kalle collaborated on the design of the apple logic.
+Erik and Kalle collaborated on data.c
 
 ************************************************************/
 

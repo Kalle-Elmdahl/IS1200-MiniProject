@@ -1,6 +1,6 @@
 /************************************************************
 
-Very Advanced Snake on Very Small Display
+         Very Advanced Snake on Very Small Display
 
 A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
 course IS1200 during spring 2021.

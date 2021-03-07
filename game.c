@@ -1,3 +1,19 @@
+/************************************************************
+
+         Very Advanced Snake on Very Small Display
+
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~ game.c ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Kalle is the architect behind the game logic.
+
+Erik and Kalle collaborated on the project and have both contributed 
+to the code in game.c
+
+************************************************************/
+
 #include <stdint.h>
 #include <pic32mx.h>
 #include <math.h>
