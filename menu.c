@@ -1,3 +1,19 @@
+/************************************************************
+
+         Very Advanced Snake on Very Small Display
+
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~ menu.c ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Kalle is the original author of menu.c
+
+Erik and Kalle collaborated on the project and have both contributed 
+to the code in menu.c. Code edits have been done by Erik.
+
+************************************************************/
+
 #include <stdint.h>
 #include <pic32mx.h>
 #include "snake.h"

@@ -1,3 +1,16 @@
+/************************************************************
+
+         Very Advanced Snake on Very Small Display
+
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~ startpage.c ~~~~~~~~~~~~~~~~~~~~~~~~
+
+Kalle is the main author of startpage.c
+
+************************************************************/
+
 #include <stdint.h>
 #include <pic32mx.h>
 #include "snake.h"

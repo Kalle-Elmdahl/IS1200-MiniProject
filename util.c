@@ -1,10 +1,16 @@
-/*  
-    util.c
-    Contains utility functions used to help other functions
-    This file written 2021 by Kalle Elmdahl
+/************************************************************
 
-    For copyright and licensing, see file COPYING 
-*/
+         Very Advanced Snake on Very Small Display
+
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~ util.c ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+util.c contains utility functions used to help other functions.
+This file written 2021 by Kalle Elmdahl
+
+************************************************************/
 
 #include <stdint.h>
 #include <pic32mx.h>

@@ -45,7 +45,7 @@ void game_init() {
 
     game_state = IN_GAME;
     new_apple();
-    initialize_obsticles();
+    initialize_obstacles();
 }
 
 
