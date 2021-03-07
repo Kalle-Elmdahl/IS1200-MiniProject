@@ -169,7 +169,7 @@ void read_from_memory(int memory_address, int len) {
 }
 
 // Clean up function, not really necessary 
-// but tidies up after memory write
+// but tidies up after memory write <- not in use
 void clear_memory_data() {
 
     int i;

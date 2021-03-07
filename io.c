@@ -21,6 +21,10 @@ Pin 3, 5, 6 and 9 (Port D pos 0, 1, 2, 3 => 1111)
 The buttons for player 1 also corresponds to the buttons found 
 on the basic IO Shield
 
+Erik and Kalle collaborated on the project and have both contributed 
+to the code in io.c
+
+
 ************************************************************/
 
 #include <stdint.h>
@@ -127,7 +131,7 @@ void check_game_buttons() {
                 letters[selected_letter]--;
             if(letters[selected_letter] != 90 && clicks & 0x2) 
                 letters[selected_letter]++;
-            if(selected_letter != 1 && clicks & 0x4) 
+            if(selected_letter != 2 && clicks & 0x4) 
                 selected_letter++;
             if(selected_letter != 0 && clicks & 0x8) 
                 selected_letter--;
