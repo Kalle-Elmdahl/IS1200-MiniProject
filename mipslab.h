@@ -26,6 +26,9 @@
 enum app_states {START_PAGE, MENU, SUB_MENU, GAME} app_state;
 enum app_states app_state;
 
+enum start_states {SWITCH_WARNING, TITLE_SCREEN} start_state;
+enum start_states start_state;
+
 enum game_states {IN_GAME, GAME_OVER, WRITING_HIGHSCORE} game_state;
 enum game_states game_state;
 
@@ -139,6 +142,8 @@ void draw_highscore();
 
 /* startpage.c */
 void draw_start_page( void );
+void init_start_page( void );
+void update_start_page( void );
 
 /* util.c */
 void update_display( void );

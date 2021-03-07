@@ -11,13 +11,14 @@ int game_update_time = 5;
 int main(void) {
     setup_ports();
     setup_display();
+    setup_user_inputs();
+    init_start_page();
     clear_pixels();
+    app_state = START_PAGE;
     draw_start_page();
     update_display();
-    app_state = START_PAGE;
 
     setup_leds();
-    setup_user_inputs();
     setup_clock();
     i2c_init();
 	return 0;
@@ -33,7 +34,7 @@ void update() {
 
         screen_should_update = check_user_inputs(); // returns 1 if i.e. button is clicked
 
-        if(app_state == GAME) {
+        if(app_state == GAME || (app_state == START_PAGE && start_state == TITLE_SCREEN)) {
 		    timeoutcount++;
         } else if(screen_should_update) {
             clear_pixels();
@@ -56,7 +57,12 @@ void update() {
 
 		if (timeoutcount == game_update_time) {
             clear_pixels();
-            game_update();
+            if(app_state == GAME) {
+                game_update();
+            } else {
+                update_start_page();
+                draw_start_page();
+            }
             update_display();
             timeoutcount = 0;
 		}
