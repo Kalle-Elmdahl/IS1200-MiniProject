@@ -1,3 +1,23 @@
+/************************************************************
+
+         Very Advanced Snake on Very Small Display
+
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~  ai.c ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Kalle is the main author of ai.c
+
+The AI mode is essentially a 2 player game mode, where player 2
+is controlled by the ChipKIT.
+
+ai.c contains the functions that calculates the best
+possible path for the ai to assume in order to avoid obstacles
+and still chase the apples in the game.
+
+************************************************************/
+
 #include <stdint.h>
 #include <pic32mx.h>
 #include "snake.h"

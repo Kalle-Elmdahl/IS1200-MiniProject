@@ -1,3 +1,16 @@
+/************************************************************
+
+         Very Advanced Snake on Very Small Display
+
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~ data.c ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Erik and Kalle collaborated on the design of the apple logic.
+
+************************************************************/
+
 #include <stdint.h>
 #include <pic32mx.h>
 #include "snake.h"

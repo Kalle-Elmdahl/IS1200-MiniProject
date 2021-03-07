@@ -1,9 +1,17 @@
 /************************************************************
 
-Very Advanced Snake on Very Small Display
+         Very Advanced Snake on Very Small Display
 
 A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
 course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~  main.c ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+main.c calls the functions required to setup the game and the
+logic to keep the game running, and what to display on screen.
+
+Erik and Kalle collaborated on the code.
+Code edit has been done by both authors.
 
 ************************************************************/
 

@@ -2,7 +2,6 @@
     util.c
     Contains utility functions used to help other functions
     This file written 2021 by Kalle Elmdahl
-    Some parts are original code written by F Lundevall and Axel Isaksson
 
     For copyright and licensing, see file COPYING 
 */
