@@ -133,7 +133,7 @@ void setup_clock() {
 
 
     TMR1 = 0x0; // Clear timer register
-    T1CONSET = 0x0070; // Set prescaler 1:256
+    T1CONSET = 0x10; // Set prescaler
     PR1 = 0x7FFF; // Load period register
     T1CONSET = 0x8000; // Start timer
 

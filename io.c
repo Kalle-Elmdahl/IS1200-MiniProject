@@ -6,7 +6,7 @@ void check_for_start();
 void check_menu_buttons();
 void check_game_buttons();
 void check_sub_menu_buttons();
-int last_btns = 0, btns = 0, last_sws = 0xf, sws = 0, switch_updates = 0, clicks = 0, updated = 0;
+int last_btns = 0, btns = 0, last_sws = 0xf, sws = 0, switch_updates = 0, clicks = 0;
 
 int check_user_inputs() {
     sws = (PORTD >> 8) & 0xF; // Switch infromation from port D
@@ -14,7 +14,7 @@ int check_user_inputs() {
     // player2
     btns |= (PORTD << 4) & 0xf0; // Player 2 buttons are located at Port D (chipkit pin 3, 5, 6 & 9) 0->3
     clicks = btns & ~last_btns;
-    switch_updates = sws & ~last_sws | ~sws & last_sws;
+    switch_updates = sws ^ last_sws;
 
 
     switch(app_state) {
@@ -32,8 +32,6 @@ int check_user_inputs() {
             break;
     }
 
-    if(clicks || switch_updates) updated = 1;
-
     if(sws & 0b1 && app_state != START_PAGE) {
         if(app_state != GAME && game_state != IN_GAME) game_init(); // Conditions for starting the game
         if(app_state != GAME && game_mode == AI)
@@ -50,7 +48,7 @@ int check_user_inputs() {
     }
     last_btns = btns;
     last_sws = sws;
-    return updated;
+    return (clicks || switch_updates);
 }
 
 
