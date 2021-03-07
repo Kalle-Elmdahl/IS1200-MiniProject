@@ -1,6 +1,35 @@
+/************************************************************
+
+         Very Advanced Snake on Very Small Display
+
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~  io.c ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Erik is the main author of io.c. Logic for input pins is based
+on the documentation found at:
+
+- https://reference.digilentinc.com/_media/chipkit_uno32:chipkit_uno32_rm.pdf
+
+* Player 1 buttons are located at:
+Pin 4 (Port F pos 1 => 0010) and Pin 34, 36 and 37 (Port D pos 5, 6 and 7 => 1110 0000)
+
+* Player 2 buttons are located at:
+Pin 3, 5, 6 and 9 (Port D pos 0, 1, 2, 3 => 1111)
+
+The buttons for player 1 also corresponds to the buttons found 
+on the basic IO Shield
+
+Erik and Kalle collaborated on the project and have both contributed 
+to the code in io.c
+
+
+************************************************************/
+
 #include <stdint.h>
 #include <pic32mx.h>
-#include "mipslab.h"
+#include "snake.h"
 
 void check_for_start();
 void check_menu_buttons();
@@ -100,7 +129,7 @@ void check_game_buttons() {
                 letters[selected_letter]--;
             if(letters[selected_letter] != 90 && clicks & 0x2) 
                 letters[selected_letter]++;
-            if(selected_letter != 1 && clicks & 0x4) 
+            if(selected_letter != 2 && clicks & 0x4) 
                 selected_letter++;
             if(selected_letter != 0 && clicks & 0x8) 
                 selected_letter--;

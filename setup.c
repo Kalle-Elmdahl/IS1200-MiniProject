@@ -1,6 +1,23 @@
+/************************************************************
+
+         Very Advanced Snake on Very Small Display
+
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~ setup.c ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Erik and Kalle collaborated on the project and have both contributed 
+to the code in setup.c. Much of the original content inspired
+by the labs in the course is1200.
+
+Parts of the code are credited to Axel Isaksson and F Lundevall
+
+************************************************************/
+
 #include <stdint.h>
 #include <pic32mx.h>
-#include "mipslab.h"
+#include "snake.h"
 
 #define DISPLAY_CHANGE_TO_COMMAND_MODE (PORTFCLR = 0x10)
 #define DISPLAY_CHANGE_TO_DATA_MODE (PORTFSET = 0x10)
@@ -96,7 +113,6 @@ void setup_display(void) {
 	spi_send_recv(0x20);
 	
 	spi_send_recv(0xAF);
-
 
 }
 

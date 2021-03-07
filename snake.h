@@ -1,11 +1,19 @@
-/* mipslab.h
-   Header file for all labs.
-   This file written 2015 by F Lundevall
-   Some parts are original code written by Axel Isaksson
+/************************************************************
 
-   Latest update 2015-08-28 by F Lundevall
+         Very Advanced Snake on Very Small Display
 
-   For copyright and licensing, see file COPYING */
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~ snake.h ~~~~~~~~~~~~~~~~~~~~~~~~
+
+snake.h is a header file containing reference to variables
+and functions that are globally accesible.
+
+Erik and Kalle collaborated on the project and have both contributed 
+to the code in snake.h.
+
+************************************************************/
 
 /* Display */
 #define DISPLAY_WIDTH 128
@@ -105,7 +113,7 @@ struct Apple {
 };
 
 /* Obstacles.c */
-void initialize_obsticles ( void );
+void initialize_obstacles ( void );
 void display_obstacles ( void );
 struct Obstacle {
     uint8_t x;

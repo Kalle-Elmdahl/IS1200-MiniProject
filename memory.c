@@ -1,7 +1,32 @@
+/************************************************************
+
+         Very Advanced Snake on Very Small Display
+
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~ memory.c ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Erik is the main author of memory.c
+
+The file contains the functions to write and read to and from the EEPROM.
+
+Parts of the code inspired by:
+- https://github.com/is1200-example-projects/hello-temperature/blob/master/main.c
+No author listed on page.
+
+Functions for communicating with the EEPROM using the i2c protocol
+are written by Erik Malm.
+
+Documentation for understanding the protocol and its functions:
+- https://ww1.microchip.com/downloads/en/DeviceDoc/24AA256-24LC256-24FC256-Data-Sheet-20001203W.pdf
+
+************************************************************/
+
 #include <stdint.h>
 #include <stdbool.h>
 #include <pic32mx.h>
-#include "mipslab.h"  /* Declarations for game */
+#include "snake.h"  /* Declarations for game */
 
 #define WRITE 0xA0 // Tell the i2c to initiate a write operation
 #define READ 0xA1 // Tell the i2c to initiate a read operation
@@ -144,7 +169,7 @@ void read_from_memory(int memory_address, int len) {
 }
 
 // Clean up function, not really necessary 
-// but tidies up after memory write
+// but tidies up after memory write <- not in use
 void clear_memory_data() {
 
     int i;
