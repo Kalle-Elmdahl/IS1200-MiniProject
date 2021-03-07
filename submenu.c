@@ -25,6 +25,7 @@ void update_speed(int btns);
 void update_difficulty(int btns);
 void draw_credits();
 void draw_highscore();
+void check_clear_highscore(int btns);
 void draw_difficulty();
 int current_list_item = 0;
 
@@ -60,10 +61,6 @@ void draw_sub_menu() {
 
     /* Bottom bar */
     draw_rect(0, DISPLAY_HEIGHT - 8, DISPLAY_WIDTH - SIDEBAR_WIDTH, 8);
-    draw_image(3, DISPLAY_HEIGHT - 6, 5, 3, &arrow_up[0][0]);
-    draw_image(10, DISPLAY_HEIGHT - 6, 5, 3, &arrow_down[0][0]);
-    draw_text(18, 3, "Select");
-    draw_text(45, 3, "Back");
 }
 
 void update_sub_menu(int btns) {
@@ -73,6 +70,9 @@ void update_sub_menu(int btns) {
             break;
         case SPEED:
             update_speed(btns);
+            break;
+        case HIGHSCORE:
+            check_clear_highscore(btns);
             break;
         case DIFFICULTY:
             update_difficulty(btns);
@@ -86,6 +86,11 @@ void draw_game_mode() {
     draw_text(LIST_LEFT_PADDING, 2, "AI");
     draw_image(60, 2 + current_list_item * 8, 3, 5, &arrow_left[0][0]);
     draw_image(5, 2 + game_mode * 8, 6, 5, &check_box[0][0]);
+
+    draw_image(3, DISPLAY_HEIGHT - 6, 5, 3, &arrow_up[0][0]);
+    draw_image(10, DISPLAY_HEIGHT - 6, 5, 3, &arrow_down[0][0]);
+    draw_text(18, 3, "Select");
+    draw_text(45, 3, "Back");
 }
 
 void update_game_mode(int btns) {
@@ -103,6 +108,11 @@ void draw_speed() {
     draw_text(LIST_LEFT_PADDING, 2, "Slow");
     draw_image(50, 2 + current_list_item * 8, 3, 5, &arrow_left[0][0]);
     draw_image(5, 2 + game_speed * 8, 6, 5, &check_box[0][0]);
+
+    draw_image(3, DISPLAY_HEIGHT - 6, 5, 3, &arrow_up[0][0]);
+    draw_image(10, DISPLAY_HEIGHT - 6, 5, 3, &arrow_down[0][0]);
+    draw_text(18, 3, "Select");
+    draw_text(45, 3, "Back");
 }
 
 void update_speed(int btns) {
@@ -128,11 +138,12 @@ void update_speed(int btns) {
 void draw_credits() {
     draw_text(3, 0, "Game made by");
     draw_text(3, 1, "Erik and Kalle");
+
+    draw_text(45, 3, "Back");
 }
 
 void draw_highscore() {
 
-    // WORKING FUNCTION BELOW ---
     int i;
 
     init_higscores();
@@ -149,6 +160,15 @@ void draw_highscore() {
         draw_text(50,i,score);
      }
 
+    draw_text(3, 3, "Clear");
+    draw_text(45, 3, "Back");
+
+}
+
+void check_clear_highscore(int btns) {
+    if(btns & 0x8) {
+        clear_highscore_memory();
+    }
 }
 
 void draw_difficulty() {
@@ -157,6 +177,11 @@ void draw_difficulty() {
     draw_text(LIST_LEFT_PADDING, 2, "Hard");
     draw_image(50, 2 + current_list_item * 8, 3, 5, &arrow_left[0][0]);
     draw_image(5, 2 + difficulty * 8, 6, 5, &check_box[0][0]);
+
+    draw_image(3, DISPLAY_HEIGHT - 6, 5, 3, &arrow_up[0][0]);
+    draw_image(10, DISPLAY_HEIGHT - 6, 5, 3, &arrow_down[0][0]);
+    draw_text(18, 3, "Select");
+    draw_text(45, 3, "Back");
 }
 
 void update_difficulty(int btns) {

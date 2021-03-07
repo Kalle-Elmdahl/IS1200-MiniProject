@@ -20,7 +20,7 @@ This file written 2021 by Kalle Elmdahl
 #define DISPLAY_CHANGE_TO_DATA_MODE (PORTFSET = 0x10)
 
 void update_display() {
-    int i, j, k, sum;
+    int i, j, k, sum = 0;
     for(i = 0; i < DISPLAY_ROWS; i++) {
 		DISPLAY_CHANGE_TO_COMMAND_MODE;
 		spi_send_recv(0x22);

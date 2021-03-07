@@ -183,7 +183,7 @@ void clear_memory_data() {
 // Function to reset current highscores from meory.
 void clear_highscore_memory() {
     int i;
-    char empty[3] = {0, 0, 0};
+    char empty[4] = {0, 0, 0, 0};
     for (i = 0; i < 3; i ++)
         write_to_memory(empty,(0x1000) * (i+1),4);
 }
