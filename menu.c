@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <pic32mx.h>
-#include "mipslab.h"
+#include "snake.h"
 
 void get_menu_text();
 const struct menu_item menu_items[number_of_menu_items];

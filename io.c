@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <pic32mx.h>
-#include "mipslab.h"
+#include "snake.h"
 
 void check_for_start();
 void check_menu_buttons();

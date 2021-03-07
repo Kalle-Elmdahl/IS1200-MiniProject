@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <pic32mx.h>
 #include <math.h>
-#include "mipslab.h"
+#include "snake.h"
 
 struct Snake player1;
 struct Snake player2;

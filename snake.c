@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <pic32mx.h>
-#include "mipslab.h"
+#include "snake.h"
 
 #define SNAKE_INITIAL_LENGTH 4 // Defines the inital length of the snake
 
@@ -29,8 +29,8 @@ struct Snake initialize_snake(uint8_t player) {
     }
 
     int i;
-    /* Determine the starting positions and starting direction for the players */
 
+    /* Determine the starting positions and starting direction for the players */
     for (i = 0; i <= SNAKE_INITIAL_LENGTH; i++) {
         snake.x[i] = INITIAL_X_POSITIONS[player] + (player == 0 ?  -i * SNAKE_WIDTH : i * SNAKE_WIDTH);
         snake.y[i] = INITIAL_Y_POSITIONS[player];

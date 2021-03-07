@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <pic32mx.h>
-#include "mipslab.h"
+#include "snake.h"
 
 uint8_t text[DISPLAY_ROWS][DISPLAY_WIDTH];
 const uint8_t const font[128][CHAR_WIDTH] = {

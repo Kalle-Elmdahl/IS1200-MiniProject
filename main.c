@@ -1,6 +1,15 @@
+/************************************************************
+
+Very Advanced Snake on Very Small Display
+
+A game by Kalle Elmdahl and Erik Malm, developed in the KTH 
+course IS1200 during spring 2021.
+
+************************************************************/
+
 #include <stdint.h>
 #include <pic32mx.h>
-#include "mipslab.h"
+#include "snake.h"
 
 uint8_t pixels[DISPLAY_HEIGHT][DISPLAY_WIDTH];
 int timeoutcount = 0;

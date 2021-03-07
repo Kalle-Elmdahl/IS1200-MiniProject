@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <pic32mx.h>
-#include "mipslab.h"  /* Declarations for game */
+#include "snake.h"  /* Declarations for game */
 
 #define WRITE 0xA0 // Tell the i2c to initiate a write operation
 #define READ 0xA1 // Tell the i2c to initiate a read operation
