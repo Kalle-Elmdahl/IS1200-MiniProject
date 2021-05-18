@@ -29,11 +29,10 @@ int main(void) {
     setup_ports();
     setup_display();
     setup_user_inputs();
-    init_start_page();
+    // init_start_page();
     clear_pixels();
     app_state = START_PAGE;
     draw_start_page();
-    update_display();
 
     setup_leds();
     setup_clock();
@@ -47,6 +46,7 @@ void update() {
     // Clock is updated every 1/10 second
     if (IFS(0) & 0x100) {
 		IFSCLR(0) = 0x100;
+        (*E)++;
 
         screen_should_update = check_user_inputs(); // returns 1 if i.e. button is clicked
 
@@ -69,14 +69,6 @@ void update() {
             }
             update_display();
             return;
-        }
-
-        if(app_state == START_PAGE && start_state == TITLE_SCREEN) {
-            (*E)++;
-            clear_pixels();
-            update_start_page();
-            draw_start_page();
-            update_display();
         }
 
 		if (timeoutcount == game_update_time) {

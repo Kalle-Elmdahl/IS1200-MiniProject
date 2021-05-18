@@ -15,7 +15,7 @@ Kalle is the main author of startpage.c
 #include <pic32mx.h>
 #include "snake.h"
 
-void draw_title_screen();
+/* void draw_title_screen();
 void new_apples();
 
 #define initial_x 49
@@ -54,7 +54,7 @@ void init_start_page() {
     }
 
     
-}
+} */
 
 void draw_start_page() {
     switch(start_state) {
@@ -64,13 +64,13 @@ void draw_start_page() {
             draw_text(33, 2, "to start the game");
             break;
         case TITLE_SCREEN:
-            draw_title_screen();
+            // draw_title_screen();
             break;
 
     }
 }
 
-void draw_title_screen() {
+/* void draw_title_screen() {
     // Borders
     draw_rect(0, 0, DISPLAY_WIDTH, 1);
     draw_rect(0, 1, 1, DISPLAY_HEIGHT - DISPLAY_ROW_HEIGHT - 1);
@@ -125,4 +125,4 @@ void new_apples() {
         
         } while(valid_pos == 0);
     }
-}
+} */
